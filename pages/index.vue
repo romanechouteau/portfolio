@@ -9,6 +9,19 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
+export default {
+  name: 'Index',
+  computed: mapState(['setIndex']),
+  watch: {
+    setIndex (newValue, oldValue) {
+      if (typeof newValue === 'function') {
+        this.$store.state.setIndex()
+      }
+    }
+  }
+}
 </script>
 
 <style lang="stylus">

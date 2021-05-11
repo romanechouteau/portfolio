@@ -2,6 +2,7 @@
   <div class="background">
     <Nav />
     <Nuxt />
+    <Three />
     <Contact />
   </div>
 </template>
