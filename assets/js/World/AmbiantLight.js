@@ -9,7 +9,7 @@ export default class AmbiantLight {
   }
 
   setAmbiantLight () {
-    this.light = new AmbientLight(0x232323, 1)
+    this.light = new AmbientLight(0xFFFFFF, 1)
     this.container.add(this.light)
   }
 }

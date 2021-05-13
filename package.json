@@ -14,7 +14,10 @@
     "@nuxt/content": "^1.14.0",
     "@nuxtjs/style-resources": "^1.0.0",
     "core-js": "^3.9.1",
+    "file-loader": "^6.2.0",
+    "lodash": "^4.17.21",
     "nuxt": "^2.15.3",
+    "raw-loader": "^4.0.2",
     "stylus": "^0.54.8",
     "stylus-loader": "3.0.2",
     "three": "^0.128.0"
