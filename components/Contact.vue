@@ -8,10 +8,10 @@
 <style lang="stylus">
     .contact
         position: fixed
-        bottom: -4rem
-        right: -4rem
-        width: 16rem
-        height: 16rem
+        bottom: -3rem
+        right: -3rem
+        width: 12rem
+        height: 12rem
 
         img
             width: 100%

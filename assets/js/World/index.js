@@ -1,7 +1,7 @@
 import { Object3D } from 'three'
 
-import Cube from './Cube'
 import Title from './Title'
+import Blobs from './Blobs'
 import Background from './Background'
 import PointLight from './PointLight'
 import AmbiantLight from './AmbiantLight'
@@ -34,7 +34,7 @@ export default class World {
   }
 
   setIndex () {
-    this.setCube()
+    this.setBlobs()
     this.setTitle()
   }
 
@@ -48,11 +48,11 @@ export default class World {
     this.container.add(this.title.container)
   }
 
-  setCube () {
-    this.cube = new Cube({
+  setBlobs () {
+    this.blobs = new Blobs({
       time: this.time
     })
-    this.container.add(this.cube.container)
+    this.container.add(this.blobs.container)
   }
 
   setBackground () {

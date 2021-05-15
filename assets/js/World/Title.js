@@ -48,7 +48,7 @@ export default class Title {
         uEnvMap: { value: this.envMap },
         uBackMap: { value: this.backMap },
         uResolution: { value: this.resolution },
-        uIor: { value: 1.05 }
+        uIor: { value: 2.33 }
       }
     })
     this.backMaterial = new ShaderMaterial({
@@ -89,7 +89,7 @@ export default class Title {
     this.time.on('tick', () => {
       forEach([this.romane, this.chouteau], (word, i) => {
         forEach(word, (letter, index) => {
-          letter.position.y = 0.2 - (1.5 * i) + (Math.sin(index + 0.001 * this.time.elapsed) * 0.1)
+          letter.position.y = 0.2 - (1.5 * i) + (Math.sin(index + 0.0006 * this.time.elapsed) * 0.15)
         })
       })
     })
