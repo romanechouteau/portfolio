@@ -1,7 +1,7 @@
-uniform sampler2D envMap;
-uniform sampler2D backMap;
-uniform vec2 resolution;
-uniform float ior;
+uniform sampler2D uEnvMap;
+uniform sampler2D uBackMap;
+uniform vec2 uResolution;
+uniform float uIor;
 
 varying vec3 eyeVector;
 varying vec3 worldNormal;
@@ -12,18 +12,18 @@ float Fresnel(vec3 eyeVector, vec3 worldNormal) {
 
 void main() {
 	// get screen coordinates
-	vec2 uv = gl_FragCoord.xy / resolution;
+	vec2 uv = (gl_FragCoord.xy / uResolution);
 
-	vec3 backfaceNormal = texture2D(backMap, uv).rgb;
+	vec3 backfaceNormal = texture2D(uBackMap, uv).rgb;
 
 	float a = 0.33;
 	vec3 normal = worldNormal * (1.0 - a) - backfaceNormal * a;
 	// calculate refraction and add to the screen coordinates
-	vec3 refracted = refract(eyeVector, normal, 1.0/ior);
+	vec3 refracted = refract(eyeVector, normal, 1.0 / uIor);
 	uv += refracted.xy;
 
 	// sample the background texture
-	vec4 tex = texture2D(envMap, uv);
+	vec4 tex = texture2D(uEnvMap, uv);
 
 	vec4 finalTexture = tex;
 

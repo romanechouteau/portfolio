@@ -10,7 +10,8 @@ export default class App {
     this.time = new Time()
     this.sizes = {
       width: window.innerWidth,
-      height: window.innerHeight
+      height: window.innerHeight,
+      pixelRatio: Math.min(window.devicePixelRatio, 2)
     }
 
     this.setRenderer()
@@ -36,20 +37,25 @@ export default class App {
     this.renderer.outputEncoding = sRGBEncoding
     this.renderer.setPixelRatio(window.devicePixelRatio)
     this.renderer.setSize(this.sizes.width, this.sizes.height)
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    this.renderer.setPixelRatio(this.sizes.pixelRatio)
 
-    this.envFBO = new WebGLRenderTarget(this.sizes.width, this.sizes.height)
-    this.backFBO = new WebGLRenderTarget(this.sizes.width, this.sizes.height)
+    this.envFBO = new WebGLRenderTarget(this.sizes.width * this.sizes.pixelRatio, this.sizes.height * this.sizes.pixelRatio)
+    this.backFBO = new WebGLRenderTarget(this.sizes.width * this.sizes.pixelRatio, this.sizes.height * this.sizes.pixelRatio)
     this.renderer.autoClear = false
 
     window.addEventListener('resize', () => {
       this.sizes.width = window.innerWidth
       this.sizes.height = window.innerHeight
 
-      // TODO webGLRenderTarget resize + all other resize
       this.renderer.setSize(this.sizes.width, this.sizes.height)
       this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+      this.envFBO.setSize(this.sizes.width * this.sizes.pixelRatio, this.sizes.height * this.sizes.pixelRatio)
+      this.backFBO.setSize(this.sizes.width * this.sizes.pixelRatio, this.sizes.height * this.sizes.pixelRatio)
+
       this.camera.resize()
+      this.world.title.resize()
+      this.world.background.resize()
     })
 
     this.time.on('tick', this.render.bind(this))
@@ -81,12 +87,10 @@ export default class App {
   setWorld () {
     this.world = new World({
       time: this.time,
+      sizes: this.sizes,
+      camera: this.camera,
       envMap: this.envFBO.texture,
-      backMap: this.backFBO.texture,
-      resolution: [
-        this.sizes.width * Math.min(window.devicePixelRatio, 2),
-        this.sizes.height * Math.min(window.devicePixelRatio, 2)
-      ]
+      backMap: this.backFBO.texture
     })
     this.scene.add(this.world.container)
   }

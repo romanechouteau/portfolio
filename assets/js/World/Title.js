@@ -11,15 +11,20 @@ import normalFragmentShader from '~/assets/shaders/normal.frag'
 const loader = new FBXLoader()
 
 export default class Title {
-  constructor ({ time, envMap, backMap, resolution }) {
+  constructor ({ time, sizes, envMap, backMap }) {
     this.container = new Object3D()
     this.container.name = 'Title'
 
     this.time = time
+    this.sizes = sizes
     this.envMap = envMap
     this.backMap = backMap
-    this.resolution = resolution
+    this.resolution = [
+      this.sizes.width * this.sizes.pixelRatio,
+      this.sizes.height * this.sizes.pixelRatio
+    ]
 
+    this.resize = this.resize.bind(this)
     this.setFrontMaterial = this.setFrontMaterial.bind(this)
     this.setBackMaterial = this.setBackMaterial.bind(this)
 
@@ -40,10 +45,10 @@ export default class Title {
       vertexShader,
       fragmentShader,
       uniforms: {
-        envMap: { value: this.envMap },
-        backMap: { value: this.backMap },
-        resolution: { value: this.resolution },
-        ior: { value: 2.42 }
+        uEnvMap: { value: this.envMap },
+        uBackMap: { value: this.backMap },
+        uResolution: { value: this.resolution },
+        uIor: { value: 1.05 }
       }
     })
     this.backMaterial = new ShaderMaterial({
@@ -100,5 +105,13 @@ export default class Title {
     if (this.romane && this.chouteau) {
       forEach([...this.romane, ...this.chouteau], (letter) => { letter.material = this.frontMaterial })
     }
+  }
+
+  resize () {
+    this.resolution = [
+      this.sizes.width * this.sizes.pixelRatio,
+      this.sizes.height * this.sizes.pixelRatio
+    ]
+    this.frontMaterial.uniforms.uResolution.value = this.resolution
   }
 }

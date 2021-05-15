@@ -1,4 +1,4 @@
-import { Object3D, PointLight, PointLightHelper } from 'three'
+import { Object3D, PointLight } from 'three'
 
 export default class AmbiantLight {
   constructor () {
@@ -12,7 +12,6 @@ export default class AmbiantLight {
     this.light = new PointLight(0xFFFFFF, 5, 100)
     this.light.position.set(4, 2, 5)
 
-    const pointLightHelper = new PointLightHelper(this.light)
-    this.container.add(this.light, pointLightHelper)
+    this.container.add(this.light)
   }
 }
