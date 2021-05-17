@@ -1,4 +1,5 @@
 import { Object3D } from 'three'
+import { isUndefined } from 'lodash'
 
 import Title from './Title'
 import Blobs from './Blobs'
@@ -38,21 +39,29 @@ export default class World {
     this.setTitle()
   }
 
+  setIndexProject (key) {
+    console.log(key)
+  }
+
   setTitle () {
-    this.title = new Title({
-      time: this.time,
-      sizes: this.sizes,
-      envMap: this.envMap,
-      backMap: this.backMap
-    })
-    this.container.add(this.title.container)
+    if (isUndefined(this.title)) {
+      this.title = new Title({
+        time: this.time,
+        sizes: this.sizes,
+        envMap: this.envMap,
+        backMap: this.backMap
+      })
+      return this.container.add(this.title.container)
+    }
   }
 
   setBlobs () {
-    this.blobs = new Blobs({
-      time: this.time
-    })
-    this.container.add(this.blobs.container)
+    if (isUndefined(this.blobs)) {
+      this.blobs = new Blobs({
+        time: this.time
+      })
+      return this.container.add(this.blobs.container)
+    }
   }
 
   setBackground () {

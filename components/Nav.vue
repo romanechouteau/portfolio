@@ -23,7 +23,6 @@
     align-items: center
     position: fixed
     color: carbon
-    font-family: 'HK Grotesk'
 
     a
       display: inline-block

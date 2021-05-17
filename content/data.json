@@ -1,0 +1,8 @@
+{
+    "projects": [
+        { "name" : "Projet 1" },
+        { "name" : "Projet 2" },
+        { "name" : "Projet 3" },
+        { "name" : "Projet 4" }
+    ]
+}

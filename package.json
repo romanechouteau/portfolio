@@ -20,7 +20,9 @@
     "raw-loader": "^4.0.2",
     "stylus": "^0.54.8",
     "stylus-loader": "3.0.2",
-    "three": "^0.128.0"
+    "three": "^0.128.0",
+    "vue-svg-loader": "^0.16.0",
+    "vue-template-compiler": "^2.6.12"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^6.0.0",

@@ -9,7 +9,10 @@ export default {
   name: 'Three',
   mounted () {
     const app = new App()
-    this.$store.commit('setIndexSetter', app.world.setIndex)
+    this.$store.commit('setIndexSetters', {
+      setHome: app.world.setIndex,
+      setProject: app.world.setIndexProject
+    })
   }
 }
 </script>

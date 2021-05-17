@@ -61,6 +61,16 @@ export default {
         config.module.rules.push({ test: /\.(glb|gltf)$/, use: ['file-loader'] })
         config.module.rules.push({ test: /\.(fbx|obj)$/, use: ['file-loader'] })
         config.module.rules.push({ test: /\.(ogg|mp3|wav|mpe?g)$/i, use: ['file-loader'] })
+
+        const svgRule = config.module.rules.find(rule => rule.test.test('.svg'))
+        svgRule.test = /\.(?<!inline\.)(png|jpe?g|gif|webp|svg)$/
+        config.module.rules.push({
+          test: /\.inline\.svg$/,
+          use: [
+            'babel-loader',
+            'vue-svg-loader'
+          ]
+        })
       }
     }
   }

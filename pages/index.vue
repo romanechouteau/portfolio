@@ -1,21 +1,40 @@
 <template>
   <div class="container">
-    <div>
-      <h1 class="title" />
-    </div>
+    <h2 class="subtitle">
+      creative developer
+    </h2>
+    <PagesButtons :pages="pages" />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import { get, isFunction, isEqual } from 'lodash'
 
 export default {
   name: 'Index',
-  computed: mapState(['setIndex']),
+  async asyncData ({ $content }) {
+    const projects = await $content('data').only(['projects']).fetch()
+    return {
+      pages: [
+        { name: 'index' },
+        ...get(projects, 'projects', [])
+      ]
+    }
+  },
+  computed: mapState(['indexSetters', 'indexPage']),
   watch: {
-    setIndex (newValue, oldValue) {
-      if (typeof newValue === 'function') {
-        this.$store.state.setIndex()
+    indexSetters (newValue) {
+      if (isFunction(newValue.setHome)) {
+        newValue.setHome()
+      }
+    },
+    indexPage (newValue) {
+      if (!isEqual(newValue, 0) && isFunction(get(this.$store.state, 'indexSetters.setProject'))) {
+        return this.$store.state.indexSetters.setProject(newValue)
+      }
+      if (isEqual(newValue, 0) && isFunction(get(this.$store.state, 'indexSetters.setHome'))) {
+        return this.$store.state.indexSetters.setHome()
       }
     }
   }
@@ -24,10 +43,17 @@ export default {
 
 <style lang="stylus">
   .container
-    margin: 0 auto
     min-height: 100vh
+    text-align: center
+    margin: 0 auto
+    padding: 48px
     display: flex
     justify-content: center
-    align-items: center
-    text-align: center
+    align-items: flex-end
+
+    .subtitle
+      font-weight: bold
+      color: carbon
+      font-size: 1.5rem
+
 </style>

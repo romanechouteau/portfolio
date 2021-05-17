@@ -1,9 +1,13 @@
 export const state = () => ({
-  setIndex: () => {}
+  indexSetters: { },
+  indexPage: 0
 })
 
 export const mutations = {
-  setIndexSetter (state, payload) {
-    state.setIndex = payload
+  setIndexSetters (state, payload) {
+    state.indexSetters = payload
+  },
+  setIndexPage (state, payload) {
+    state.indexPage = payload
   }
 }
