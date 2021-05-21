@@ -67,6 +67,7 @@ export default class App {
     this.camera.camera.layers.set(0)
     this.renderer.setRenderTarget(this.envFBO)
     this.renderer.render(this.scene, this.camera.camera)
+    this.renderer.clearDepth()
 
     this.camera.camera.layers.set(1)
     this.world.title.setBackMaterial()

@@ -25,7 +25,7 @@ export default {
     pages: { type: Array, default: () => [] }
   },
   beforeMount () {
-    this.scrollHandler = debounce(this.handleScroll, 100, { leading: true, trailing: false, maxWait: 1500 })
+    this.scrollHandler = debounce(this.handleScroll, 200, { leading: true, trailing: false, maxWait: 1500 })
     window.addEventListener('wheel', this.scrollHandler)
   },
   beforeDestroy () {
@@ -39,7 +39,12 @@ export default {
       return isEqual(this.$store.state.indexPage, key)
     },
     handleScroll (event) {
-      this.$store.commit('setIndexPage', (this.$store.state.indexPage + 1) % (this.pages.length))
+      if (event.deltaY >= 0) {
+        return this.$store.commit('setIndexPage', (this.$store.state.indexPage + 1) % (this.pages.length))
+      }
+
+      const prevPage = this.$store.state.indexPage - 1
+      this.$store.commit('setIndexPage', prevPage >= 0 ? prevPage : this.pages.length - 1)
     }
   }
 }

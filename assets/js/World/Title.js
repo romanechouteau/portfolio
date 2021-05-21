@@ -1,6 +1,7 @@
 import { Object3D, ShaderMaterial } from 'three'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
-import { find, forEach, get, isEqual, map, reduce } from 'lodash'
+import { gsap } from 'gsap'
+import { find, forEach, get, isEqual, last, map, reduce, reverse } from 'lodash'
 
 import pillowlavaSrc from '~/assets/models/pillowlava.fbx'
 import vertexShader from '~/assets/shaders/glass.vert'
@@ -19,10 +20,12 @@ export default class Title {
     this.sizes = sizes
     this.envMap = envMap
     this.backMap = backMap
+    this.inFrame = true
     this.resolution = [
       this.sizes.width * this.sizes.pixelRatio,
       this.sizes.height * this.sizes.pixelRatio
     ]
+    this.letterPositions = []
 
     this.resize = this.resize.bind(this)
     this.setFrontMaterial = this.setFrontMaterial.bind(this)
@@ -78,20 +81,24 @@ export default class Title {
     const start = -(totalWidth / 2)
 
     let position = start
+    this.letterPositions.push([])
     forEach(word, (letter, index) => {
       letter.scale.set(scale, scale, scale)
       letter.position.set(position, y, 0)
+      last(this.letterPositions).push(position)
       position += widths[index] + space
     })
   }
 
   setMovement () {
     this.time.on('tick', () => {
-      forEach([this.romane, this.chouteau], (word, i) => {
-        forEach(word, (letter, index) => {
-          letter.position.y = 0.2 - (1.5 * i) + (Math.sin(index + 0.0006 * this.time.elapsed) * 0.15)
+      if (this.inFrame) {
+        forEach([this.romane, this.chouteau], (word, i) => {
+          forEach(word, (letter, index) => {
+            letter.position.y = 0.2 - (1.5 * i) + (Math.sin(index + 0.0006 * this.time.elapsed) * 0.15)
+          })
         })
-      })
+      }
     })
   }
 
@@ -113,5 +120,29 @@ export default class Title {
       this.sizes.height * this.sizes.pixelRatio
     ]
     this.frontMaterial.uniforms.uResolution.value = this.resolution
+  }
+
+  hide () {
+    this.inFrame = false
+    forEach([this.romane, this.chouteau], (word, i) => {
+      gsap.to([...map(reverse([...word]), letter => letter.position)], {
+        duration: 0.7,
+        x: index => reverse([...this.letterPositions[i]])[index] + 15,
+        stagger: 0.02,
+        ease: 'power3.inOut'
+      })
+    })
+  }
+
+  show () {
+    forEach([this.romane, this.chouteau], (word, i) => {
+      gsap.to([...map(word, letter => letter.position)], {
+        duration: 0.7,
+        x: index => this.letterPositions[i][index],
+        stagger: 0.02,
+        ease: 'power3.inOut'
+      })
+    })
+    this.inFrame = true
   }
 }

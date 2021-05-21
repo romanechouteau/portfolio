@@ -1,6 +1,7 @@
 import { Object3D } from 'three'
-import { isUndefined } from 'lodash'
+import { isUndefined, nth } from 'lodash'
 
+import { INDEX_BLOBS_DATA } from '../config'
 import Title from './Title'
 import Blobs from './Blobs'
 import Background from './Background'
@@ -22,6 +23,7 @@ export default class World {
     this.setAmbiantLight()
     this.setPointLight()
     this.setIndex = this.setIndex.bind(this)
+    this.setIndexProject = this.setIndexProject.bind(this)
   }
 
   setAmbiantLight () {
@@ -35,12 +37,23 @@ export default class World {
   }
 
   setIndex () {
-    this.setBlobs()
-    this.setTitle()
+    if (isUndefined(this.blobs)) {
+      this.setBlobs(nth(INDEX_BLOBS_DATA, 0))
+    } else {
+      this.blobs.updateBlobs(nth(INDEX_BLOBS_DATA, 0))
+    }
+    if (isUndefined(this.title)) {
+      this.setTitle()
+    } else {
+      this.title.show()
+    }
   }
 
   setIndexProject (key) {
-    console.log(key)
+    this.blobs.updateBlobs(nth(INDEX_BLOBS_DATA, key))
+    if (this.title.inFrame) {
+      this.title.hide()
+    }
   }
 
   setTitle () {
@@ -55,10 +68,11 @@ export default class World {
     }
   }
 
-  setBlobs () {
+  setBlobs (blobsData) {
     if (isUndefined(this.blobs)) {
       this.blobs = new Blobs({
-        time: this.time
+        time: this.time,
+        blobsData
       })
       return this.container.add(this.blobs.container)
     }

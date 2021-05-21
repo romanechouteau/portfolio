@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2 class="subtitle">
+    <h2 :class="[$store.state.indexPage === 0 ? '' : 'hidden','subtitle']">
       creative developer
     </h2>
     <PagesButtons :pages="pages" />
@@ -42,6 +42,10 @@ export default {
 </script>
 
 <style lang="stylus">
+  body
+    height: 100vh
+    overflow: hidden
+
   .container
     min-height: 100vh
     text-align: center
@@ -55,5 +59,9 @@ export default {
       font-weight: bold
       color: carbon
       font-size: 1.5rem
+      transition: all 0.7s ease
+
+      &.hidden
+        transform: translateY(calc(48px + 5vh))
 
 </style>
