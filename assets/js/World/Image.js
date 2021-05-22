@@ -8,18 +8,20 @@ const manager = new LoadingManager()
 const textureLoader = new TextureLoader(manager)
 
 export default class Image {
-  constructor ({ key }) {
+  constructor ({ key, time }) {
     this.container = new Object3D()
     this.container.name = 'Image'
 
     this.key = key
+    this.time = time
     this.hidden = true
 
     this.setImage()
+    this.setMovement()
   }
 
   setImage () {
-    const geometry = new PlaneGeometry(3.33, 5)
+    const geometry = new PlaneGeometry(3.33, 5, 10, 10)
 
     try {
       this.imageSrc = require(`~/assets/images/project${this.key}.jpg`)
@@ -64,5 +66,11 @@ export default class Image {
 
   resetImage (direction) {
     this.image.position.y = 10 * direction
+  }
+
+  setMovement () {
+    this.time.on('tick', () => {
+      this.material.uniforms.uTime.value += 0.005
+    })
   }
 }

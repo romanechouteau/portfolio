@@ -110,7 +110,10 @@ export default class World {
   }
 
   setImages () {
-    this.images = map(this.projects, (_, key) => new Image({ key: key + 1 }))
+    this.images = map(this.projects, (_, key) => new Image({
+      key: key + 1,
+      time: this.time
+    }))
     this.container.add(...map(this.images, image => image.container))
   }
 
