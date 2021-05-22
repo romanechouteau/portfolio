@@ -25,7 +25,7 @@ export default {
     pages: { type: Array, default: () => [] }
   },
   beforeMount () {
-    this.scrollHandler = debounce(this.handleScroll, 200, { leading: true, trailing: false, maxWait: 1500 })
+    this.scrollHandler = debounce(this.handleScroll, 300, { leading: true, trailing: false, maxWait: 1500 })
     window.addEventListener('wheel', this.scrollHandler)
   },
   beforeDestroy () {

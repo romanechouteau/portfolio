@@ -3,7 +3,8 @@
     <h2 :class="[$store.state.indexPage === 0 ? '' : 'hidden','subtitle']">
       creative developer
     </h2>
-    <PagesButtons :pages="pages" />
+    <HomePagesButtons :pages="pages" />
+    <HomeProjectsInfo :pages="pages.slice(1)" />
   </div>
 </template>
 

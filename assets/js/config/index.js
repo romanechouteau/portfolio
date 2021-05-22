@@ -88,43 +88,5 @@ export const INDEX_BLOBS_DATA = [
       color1: new Color(MAIN_BLUE),
       color2: new Color(SECONDARY_BLUE)
     }
-  ],
-  [
-    {
-      scale: [2, 3, 0.5],
-      position: [5, -1, -2],
-      color1: new Color(MAIN_BLUE),
-      color2: new Color(SECONDARY_BLUE)
-    },
-    {
-      scale: [3, 1.5, 0.5],
-      position: [5, 0, -2],
-      color1: new Color(MAIN_RED),
-      color2: new Color(SECONDARY_RED)
-    },
-    {
-      scale: [1.4, 1.4, 0.5],
-      position: [3, -2, -1],
-      color1: new Color(MAIN_YELLOW),
-      color2: new Color(SECONDARY_YELLOW)
-    },
-    {
-      scale: [2.2, 1.5, 0.5],
-      position: [2, 2, -1],
-      color1: new Color(MAIN_YELLOW),
-      color2: new Color(SECONDARY_YELLOW)
-    },
-    {
-      scale: [2, 2, 0.5],
-      position: [4, 1, -1.5],
-      color1: new Color(MAIN_GREEN),
-      color2: new Color(SECONDARY_GREEN)
-    },
-    {
-      scale: [2, 1.5, 0.5],
-      position: [-1, -2, 0.5],
-      color1: new Color(MAIN_BLUE),
-      color2: new Color(SECONDARY_BLUE)
-    }
   ]
 ]
