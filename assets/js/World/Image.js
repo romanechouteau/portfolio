@@ -1,8 +1,10 @@
 import { LoadingManager, Mesh, Object3D, PlaneGeometry, ShaderMaterial, TextureLoader } from 'three'
 import { gsap } from 'gsap'
+import { isEqual } from 'lodash'
 
 import vertexShader from '../../shaders/image.vert'
 import fragmentShader from '../../shaders/image.frag'
+import { IMAGE_PROJECT_SETUP_SCALE, IMAGE_PROJECT_SETUP_X } from '../config'
 
 const manager = new LoadingManager()
 const textureLoader = new TextureLoader(manager)
@@ -40,37 +42,87 @@ export default class Image {
       fragmentShader
     })
     this.image = new Mesh(geometry, this.material)
-    this.image.position.y = -10
-    this.resetImage(-1)
 
     this.container.add(this.image)
   }
 
   show () {
-    this.hidden = false
-    gsap.to(this.image.position, {
-      duration: 1.5,
-      y: 0,
-      ease: 'elastic.out(1, 0.5)'
-    })
+    if (isEqual(this.hidden, true)) {
+      this.hidden = false
+      gsap.to(this.image.position, {
+        duration: 1.5,
+        y: 0,
+        ease: 'elastic.out(1, 0.5)'
+      })
+    }
   }
 
   hide (direction) {
-    this.hidden = true
-    gsap.to(this.image.position, {
-      duration: 1.5,
-      y: 10 * direction,
-      ease: 'elastic.out(1, 0.5)'
-    })
+    if (isEqual(this.hidden, false)) {
+      this.hidden = true
+      gsap.to(this.image.position, {
+        duration: 1.5,
+        y: 10 * direction,
+        ease: 'elastic.out(1, 0.5)'
+      })
+    }
   }
 
-  resetImage (direction) {
+  resetImageY (direction) {
     this.image.position.y = 10 * direction
+  }
+
+  resetImageX (direction) {
+    this.image.position.x = 10 * direction
+  }
+
+  setImageCenterX () {
+    this.image.position.x = 0
   }
 
   setMovement () {
     this.time.on('tick', () => {
       this.material.uniforms.uTime.value += 0.005
+    })
+  }
+
+  showProjectSetup () {
+    this.hidden = false
+
+    gsap.to(this.image.scale, {
+      duration: 1.5,
+      x: IMAGE_PROJECT_SETUP_SCALE,
+      y: IMAGE_PROJECT_SETUP_SCALE,
+      z: IMAGE_PROJECT_SETUP_SCALE,
+      ease: 'elastic.out(1, 0.5)'
+    })
+    gsap.to(this.image.position, {
+      duration: 1.5,
+      x: IMAGE_PROJECT_SETUP_X,
+      y: 0,
+      ease: 'elastic.out(1, 0.5)'
+    })
+  }
+
+  hideProjectSetup () {
+    this.hidden = true
+
+    gsap.to(this.image.scale, {
+      duration: 1.5,
+      x: 1,
+      y: 1,
+      z: 1,
+      ease: 'elastic.out(1, 0.5)'
+    })
+    gsap.to(this.image.position, {
+      duration: 1.5,
+      x: -10,
+      y: 0,
+      ease: 'elastic.out(1, 0.5)',
+      onComplete: () => {
+        this.resetImageY(-1)
+        this.setImageCenterX()
+      }
     })
   }
 }

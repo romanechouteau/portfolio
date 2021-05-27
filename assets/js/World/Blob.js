@@ -86,4 +86,12 @@ export default class Blob {
       this.color2Target = color2
     }
   }
+
+  hide () {
+    gsap.to(this.blob.position, {
+      duration: 1.5,
+      x: 15,
+      ease: 'elastic.out(1, 0.5)'
+    })
+  }
 }

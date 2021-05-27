@@ -11,7 +11,10 @@ export default {
     const app = new App()
     this.$store.commit('setWorldSetters', {
       setHome: app.world.setIndex,
-      setIndexProject: app.world.setIndexProject
+      setIndexProject: app.world.setIndexProject,
+      hideIndex: app.world.hideIndex,
+      setProject: app.world.setProject,
+      hideProject: app.world.hideProject
     })
   }
 }

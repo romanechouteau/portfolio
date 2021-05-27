@@ -28,6 +28,9 @@ export default class World {
     this.setAmbiantLight()
     this.setPointLight()
     this.setIndex = this.setIndex.bind(this)
+    this.hideIndex = this.hideIndex.bind(this)
+    this.setProject = this.setProject.bind(this)
+    this.hideProject = this.hideProject.bind(this)
     this.setIndexProject = this.setIndexProject.bind(this)
     this.removeContainer = this.removeContainer.bind(this)
   }
@@ -77,7 +80,7 @@ export default class World {
       currentImage.hide(direction)
     }
     if (!isUndefined(nextImage)) {
-      nextImage.resetImage(-direction)
+      nextImage.resetImageY(-direction)
       nextImage.show()
     }
     if (this.title.inFrame) {
@@ -85,6 +88,29 @@ export default class World {
     }
 
     this.key = key - 1
+  }
+
+  hideIndex () {
+    if (!isUndefined(this.blobs)) {
+      this.blobs.hide()
+    }
+  }
+
+  setProject (index) {
+    if (isUndefined(this.images)) {
+      this.setImage(index)
+    } else {
+      this.image = nth(this.images, index)
+      this.moveImage()
+    }
+
+    this.key = index
+  }
+
+  hideProject () {
+    if (!isUndefined(this.image)) {
+      this.image.hideProjectSetup()
+    }
   }
 
   setTitle () {
@@ -110,11 +136,30 @@ export default class World {
   }
 
   setImages () {
-    this.images = map(this.projects, (_, key) => new Image({
-      key: key + 1,
-      time: this.time
-    }))
+    this.images = map(this.projects, (_, key) => {
+      const img = new Image({
+        key: key + 1,
+        time: this.time
+      })
+      img.resetImageY(-1)
+      return img
+    })
     this.container.add(...map(this.images, image => image.container))
+  }
+
+  setImage (index) {
+    this.image = new Image({
+      key: index + 1,
+      time: this.time
+    })
+    this.image.resetImageX(-1)
+    this.container.add(this.image.container)
+
+    this.moveImage()
+  }
+
+  moveImage () {
+    this.image.showProjectSetup()
   }
 
   setBackground () {

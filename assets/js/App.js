@@ -64,25 +64,29 @@ export default class App {
   render () {
     this.renderer.clear()
 
-    this.camera.camera.layers.set(0)
-    this.renderer.setRenderTarget(this.envFBO)
-    this.renderer.render(this.scene, this.camera.camera)
-    this.renderer.clearDepth()
+    if (this.world.title) {
+      this.camera.camera.layers.set(0)
+      this.renderer.setRenderTarget(this.envFBO)
+      this.renderer.render(this.scene, this.camera.camera)
+      this.renderer.clearDepth()
 
-    this.camera.camera.layers.set(1)
-    this.world.title.setBackMaterial()
-    this.renderer.setRenderTarget(this.backFBO)
-    this.renderer.clearDepth()
-    this.renderer.render(this.scene, this.camera.camera)
+      this.camera.camera.layers.set(1)
+      this.world.title.setBackMaterial()
+      this.renderer.setRenderTarget(this.backFBO)
+      this.renderer.clearDepth()
+      this.renderer.render(this.scene, this.camera.camera)
+    }
 
     this.camera.camera.layers.set(0)
     this.renderer.setRenderTarget(null)
     this.renderer.render(this.scene, this.camera.camera)
     this.renderer.clearDepth()
 
-    this.camera.camera.layers.set(1)
-    this.world.title.setFrontMaterial()
-    this.renderer.render(this.scene, this.camera.camera)
+    if (this.world.title) {
+      this.world.title.setFrontMaterial()
+      this.camera.camera.layers.set(1)
+      this.renderer.render(this.scene, this.camera.camera)
+    }
   }
 
   setWorld () {

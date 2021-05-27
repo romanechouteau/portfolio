@@ -1,17 +1,21 @@
 [
     {
+        "id": 0,
         "name": "Mirage Festival",
         "slug": "mirage"
     },
     {
+        "id": 1,
         "name": "Specimen BDDI",
         "slug": "dataviz"
     },
     {
+        "id": 2,
         "name" : "Little Nightclub",
         "slug": "nightclub"
     },
     {
+        "id": 3,
         "name" : "???",
         "slug": "unknown"
     }
