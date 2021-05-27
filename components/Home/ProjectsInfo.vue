@@ -1,14 +1,24 @@
 <template>
-  <div class="projectInfo">
-    <h2
+  <div class="projectsInfo">
+    <div
       v-for="(project, key) in pages"
       :key="key"
-      :class="[isSelected(key) ? '' : 'hidden','projectTitle']"
+      :class="[isSelected(key) ? '' : 'hidden','projectInfo']"
     >
-      <span v-for="(word, i) in getName(project.name)" :key="`word-${i}`">
-        <span>{{ word }}</span>
-      </span>
-    </h2>
+      <h2
+        class="projectTitle"
+      >
+        <span v-for="(word, i) in getName(project.name)" :key="`word-${i}`">
+          <span>{{ word }}</span>
+        </span>
+      </h2>
+      <NuxtLink
+        :to="`/projects/${project.slug}`"
+        class="projectCTA"
+      >
+        see more
+      </NuxtLink>
+    </div>
   </div>
 </template>
 
@@ -32,6 +42,7 @@ export default {
 </script>
 
 <style lang="stylus">
+  .projectInfo
     .projectTitle
       font-weight: bold
       color: carbon
@@ -46,6 +57,18 @@ export default {
       span
         font-size: 3rem
 
-      &.hidden
-        transform: translateX(calc(-50vw - 100%))
+    .projectCTA
+      font-weight: bold
+      color: carbon
+      position: absolute
+      bottom: 25%
+      left: 60%
+      transition: all 0.7s ease
+
+  .hidden
+    .projectTitle
+      transform: translateX(calc(-50vw - 100%))
+
+    .projectCTA
+      transform: translateX(calc(50vw + 100%))
 </style>
