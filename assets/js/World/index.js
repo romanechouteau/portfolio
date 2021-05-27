@@ -2,7 +2,7 @@ import { Object3D } from 'three'
 import { get, isUndefined, map, nth } from 'lodash'
 
 import { INDEX_BLOBS_DATA } from '../config'
-import data from '../../../content/data.json'
+import projects from '../../../content/projects.json'
 import Title from './Title'
 import Blobs from './Blobs'
 import Image from './Image'
@@ -22,7 +22,7 @@ export default class World {
     this.backMap = backMap
 
     this.key = -1
-    this.projects = get(data, 'projects', [])
+    this.projects = projects
 
     this.setBackground()
     this.setAmbiantLight()

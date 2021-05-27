@@ -1,11 +1,11 @@
 export const state = () => ({
-  indexSetters: { },
+  worldSetters: { },
   indexPage: 0
 })
 
 export const mutations = {
-  setIndexSetters (state, payload) {
-    state.indexSetters = payload
+  setWorldSetters (state, payload) {
+    state.worldSetters = payload
   },
   setIndexPage (state, payload) {
     state.indexPage = payload

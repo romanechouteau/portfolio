@@ -15,27 +15,27 @@ import { get, isFunction, isEqual } from 'lodash'
 export default {
   name: 'Index',
   async asyncData ({ $content }) {
-    const projects = await $content('data').only(['projects']).fetch()
+    const projects = await $content('projects').fetch()
     return {
       pages: [
         { name: 'index' },
-        ...get(projects, 'projects', [])
+        ...projects
       ]
     }
   },
-  computed: mapState(['indexSetters', 'indexPage']),
+  computed: mapState(['worldSetters', 'indexPage']),
   watch: {
-    indexSetters (newValue) {
+    worldSetters (newValue) {
       if (isFunction(newValue.setHome)) {
         newValue.setHome()
       }
     },
     indexPage (newValue) {
-      if (!isEqual(newValue, 0) && isFunction(get(this.$store.state, 'indexSetters.setProject'))) {
-        return this.$store.state.indexSetters.setProject(newValue)
+      if (!isEqual(newValue, 0) && isFunction(get(this.$store.state, 'worldSetters.setIndexProject'))) {
+        return this.$store.state.worldSetters.setIndexProject(newValue)
       }
-      if (isEqual(newValue, 0) && isFunction(get(this.$store.state, 'indexSetters.setHome'))) {
-        return this.$store.state.indexSetters.setHome()
+      if (isEqual(newValue, 0) && isFunction(get(this.$store.state, 'worldSetters.setHome'))) {
+        return this.$store.state.worldSetters.setHome()
       }
     }
   }

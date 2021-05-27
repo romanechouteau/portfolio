@@ -9,9 +9,9 @@ export default {
   name: 'Three',
   mounted () {
     const app = new App()
-    this.$store.commit('setIndexSetters', {
+    this.$store.commit('setWorldSetters', {
       setHome: app.world.setIndex,
-      setProject: app.world.setIndexProject
+      setIndexProject: app.world.setIndexProject
     })
   }
 }
