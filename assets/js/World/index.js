@@ -1,5 +1,5 @@
 import { Object3D } from 'three'
-import { get, isUndefined, map, nth } from 'lodash'
+import { get, isUndefined, map, nth, forEach } from 'lodash'
 
 import { INDEX_BLOBS_DATA } from '../config'
 import projects from '../../../content/projects.json'
@@ -98,6 +98,11 @@ export default class World {
     }
     if (!isUndefined(this.title) && this.title.inFrame) {
       this.title.hide()
+    }
+    if (!isUndefined(this.images)) {
+      forEach(this.images, (image) => {
+        image.hide(-1)
+      })
     }
   }
 
