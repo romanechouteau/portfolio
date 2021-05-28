@@ -29,12 +29,10 @@ export default {
       this.setIndex(newValue.setHome)
     },
     indexPage (newValue) {
-      if (!isEqual(newValue, 0) && isFunction(get(this.$store.state, 'worldSetters.setIndexProject'))) {
-        return this.$store.state.worldSetters.setIndexProject(newValue)
+      if (!isEqual(newValue, 0)) {
+        return this.setProject(this.$store.state.worldSetters.setIndexProject, newValue)
       }
-      if (isEqual(newValue, 0) && isFunction(get(this.$store.state, 'worldSetters.setHome'))) {
-        return this.$store.state.worldSetters.setHome()
-      }
+      return this.setIndex(this.$store.state.worldSetters.setHome)
     }
   },
   mounted () {
@@ -50,6 +48,11 @@ export default {
     setIndex (setHome) {
       if (isFunction(setHome)) {
         setHome()
+      }
+    },
+    setProject (setIndexProject, key) {
+      if (isFunction(setIndexProject)) {
+        setIndexProject(key)
       }
     }
   }
