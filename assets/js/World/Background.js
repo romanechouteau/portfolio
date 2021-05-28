@@ -1,5 +1,6 @@
 import { Mesh, ShaderMaterial, Object3D, PlaneGeometry, Color } from 'three'
 
+import { getSizeAtZ } from '../utils/Size'
 import vertexShader from '~/assets/shaders/background.vert'
 import fragmentShader from '~/assets/shaders/background.frag'
 
@@ -17,15 +18,9 @@ export default class Background {
   }
 
   getBackgroundSize () {
-    const cameraZ = this.camera.camera.position.z
     const z = -5
-    const distance = cameraZ - z
+    const { width, height } = getSizeAtZ(z, this.camera.camera, this.sizes)
 
-    const aspect = this.sizes.width / this.sizes.height
-    const vFov = this.camera.camera.fov * Math.PI / 180
-
-    const height = 2 * Math.tan(vFov / 2) * distance
-    const width = height * aspect
     return { width, height, z }
   }
 

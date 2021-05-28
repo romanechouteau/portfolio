@@ -54,8 +54,7 @@ export default class App {
       this.backFBO.setSize(this.sizes.width * this.sizes.pixelRatio, this.sizes.height * this.sizes.pixelRatio)
 
       this.camera.resize()
-      this.world.title.resize()
-      this.world.background.resize()
+      this.world.resize()
     })
 
     this.time.on('tick', this.render.bind(this))

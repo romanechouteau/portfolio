@@ -7,7 +7,7 @@
       <NuxtLink to="/">
         my projects
       </NuxtLink>
-      <NuxtLink to="/">
+      <NuxtLink to="/about">
         about me
       </NuxtLink>
     </div>

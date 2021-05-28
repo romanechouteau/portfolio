@@ -27,7 +27,9 @@ export default class World {
     this.setBackground()
     this.setAmbiantLight()
     this.setPointLight()
+    this.setAbout = this.setAbout.bind(this)
     this.setIndex = this.setIndex.bind(this)
+    this.hideAbout = this.hideAbout.bind(this)
     this.hideIndex = this.hideIndex.bind(this)
     this.setProject = this.setProject.bind(this)
     this.hideProject = this.hideProject.bind(this)
@@ -94,14 +96,17 @@ export default class World {
     if (!isUndefined(this.blobs)) {
       this.blobs.hide()
     }
+    if (!isUndefined(this.title) && this.title.inFrame) {
+      this.title.hide()
+    }
   }
 
   setProject (index) {
     if (isUndefined(this.images)) {
-      this.setImage(index)
+      this.setImage('image', index + 1)
     } else {
       this.image = nth(this.images, index)
-      this.moveImage()
+      this.moveImage('image')
     }
 
     this.key = index
@@ -109,7 +114,23 @@ export default class World {
 
   hideProject () {
     if (!isUndefined(this.image)) {
-      this.image.hideProjectSetup()
+      this.image.hideBigImage()
+    }
+  }
+
+  setAbout () {
+    if (isUndefined(this.aboutImage)) {
+      this.setImage('aboutImage', 'about')
+    } else {
+      this.aboutImage.resetImageX(-1)
+      this.aboutImage.setImageCenterY()
+      this.moveImage('aboutImage')
+    }
+  }
+
+  hideAbout () {
+    if (!isUndefined(this.aboutImage)) {
+      this.aboutImage.hideBigImage()
     }
   }
 
@@ -139,7 +160,9 @@ export default class World {
     this.images = map(this.projects, (_, key) => {
       const img = new Image({
         key: key + 1,
-        time: this.time
+        time: this.time,
+        sizes: this.sizes,
+        camera: this.camera
       })
       img.resetImageY(-1)
       return img
@@ -147,19 +170,21 @@ export default class World {
     this.container.add(...map(this.images, image => image.container))
   }
 
-  setImage (index) {
-    this.image = new Image({
-      key: index + 1,
-      time: this.time
+  setImage (classKey, key) {
+    this[classKey] = new Image({
+      key,
+      time: this.time,
+      sizes: this.sizes,
+      camera: this.camera
     })
-    this.image.resetImageX(-1)
-    this.container.add(this.image.container)
+    this[classKey].resetImageX(-1)
+    this.container.add(this[classKey].container)
 
-    this.moveImage()
+    this.moveImage(classKey)
   }
 
-  moveImage () {
-    this.image.showProjectSetup()
+  moveImage (classKey) {
+    this[classKey].showBigImage()
   }
 
   setBackground () {
@@ -173,5 +198,17 @@ export default class World {
 
   removeContainer (object) {
     this.container.remove(object)
+  }
+
+  resize () {
+    if (!isUndefined(this.title)) {
+      this.title.resize()
+    }
+    if (!isUndefined(this.background)) {
+      this.background.resize()
+    }
+    if (!isUndefined(this.image)) {
+      this.image.resize()
+    }
   }
 }

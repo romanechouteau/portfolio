@@ -1,22 +1,32 @@
 import { LoadingManager, Mesh, Object3D, PlaneGeometry, ShaderMaterial, TextureLoader } from 'three'
 import { gsap } from 'gsap'
-import { isEqual } from 'lodash'
+import { isEqual, isNumber } from 'lodash'
 
 import vertexShader from '../../shaders/image.vert'
 import fragmentShader from '../../shaders/image.frag'
-import { IMAGE_PROJECT_SETUP_SCALE, IMAGE_PROJECT_SETUP_X } from '../config'
+import { IMAGE_PROJECT_SETUP_SCALE } from '../config'
+import { getObjectXPositionningData } from '../utils/Size'
 
 const manager = new LoadingManager()
 const textureLoader = new TextureLoader(manager)
 
 export default class Image {
-  constructor ({ key, time }) {
+  constructor ({ key, time, sizes, camera }) {
     this.container = new Object3D()
     this.container.name = 'Image'
 
-    this.key = key
+    if (isEqual(key, 'about')) {
+      this.key = key
+    } else if (isNumber(key)) {
+      this.key = `project${key}`
+    } else {
+      this.key = 'project1'
+    }
     this.time = time
+    this.sizes = sizes
+    this.camera = camera
     this.hidden = true
+    this.bigImage = false
 
     this.setImage()
     this.setMovement()
@@ -24,18 +34,15 @@ export default class Image {
 
   setImage () {
     const geometry = new PlaneGeometry(3.33, 5, 10, 10)
+    geometry.computeBoundingBox()
 
-    try {
-      this.imageSrc = require(`~/assets/images/project${this.key}.jpg`)
-    } catch (err) {
-      this.imageSrc = require('~/assets/images/project1.jpg')
-    }
+    this.imageSrc = require(`~/assets/images/${this.key}.jpg`)
 
     this.texture = textureLoader.load(this.imageSrc)
 
     this.material = new ShaderMaterial({
       uniforms: {
-        uTime: { value: 1.0 },
+        uTime: { value: 0.0 },
         uTexture: { type: 't', value: this.texture }
       },
       vertexShader,
@@ -80,14 +87,21 @@ export default class Image {
     this.image.position.x = 0
   }
 
+  setImageCenterY () {
+    this.image.position.y = 0
+  }
+
   setMovement () {
     this.time.on('tick', () => {
       this.material.uniforms.uTime.value += 0.005
     })
   }
 
-  showProjectSetup () {
+  showBigImage () {
     this.hidden = false
+    this.bigImage = true
+
+    const x = this.getImagePositionLeft()
 
     gsap.to(this.image.scale, {
       duration: 1.5,
@@ -98,14 +112,15 @@ export default class Image {
     })
     gsap.to(this.image.position, {
       duration: 1.5,
-      x: IMAGE_PROJECT_SETUP_X,
+      x,
       y: 0,
       ease: 'elastic.out(1, 0.5)'
     })
   }
 
-  hideProjectSetup () {
+  hideBigImage () {
     this.hidden = true
+    this.bigImage = false
 
     gsap.to(this.image.scale, {
       duration: 1.5,
@@ -120,9 +135,43 @@ export default class Image {
       y: 0,
       ease: 'elastic.out(1, 0.5)',
       onComplete: () => {
-        this.resetImageY(-1)
-        this.setImageCenterX()
+        if (isEqual(this.bigImage, false)) {
+          this.resetImageY(-1)
+          this.setImageCenterX()
+        }
       }
     })
+  }
+
+  getImagePositionLeft () {
+    const matrix = this.image.matrixWorld.clone().makeScale(IMAGE_PROJECT_SETUP_SCALE, IMAGE_PROJECT_SETUP_SCALE, IMAGE_PROJECT_SETUP_SCALE)
+
+    const { width, windowLeft, windowWidth } = getObjectXPositionningData(
+      this.camera.camera,
+      this.sizes,
+      this.image,
+      matrix
+    )
+
+    return windowLeft + width / 2 + 0.05 * windowWidth
+  }
+
+  getImageHiddenPositionLeft () {
+    const matrix = this.image.matrixWorld.clone().makeScale(IMAGE_PROJECT_SETUP_SCALE, IMAGE_PROJECT_SETUP_SCALE, IMAGE_PROJECT_SETUP_SCALE)
+
+    const { width, windowLeft } = getObjectXPositionningData(
+      this.camera.camera,
+      this.sizes,
+      this.image,
+      matrix
+    )
+
+    return windowLeft - width
+  }
+
+  resize () {
+    if (isEqual(this.bigImage, true)) {
+      this.image.position.x = this.getImagePositionLeft()
+    }
   }
 }

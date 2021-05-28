@@ -14,7 +14,9 @@ export default {
       setIndexProject: app.world.setIndexProject,
       hideIndex: app.world.hideIndex,
       setProject: app.world.setProject,
-      hideProject: app.world.hideProject
+      hideProject: app.world.hideProject,
+      setAbout: app.world.setAbout,
+      hideAbout: app.world.hideAbout
     })
   }
 }

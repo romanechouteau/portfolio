@@ -91,6 +91,4 @@ export const INDEX_BLOBS_DATA = [
   ]
 ]
 
-export const IMAGE_PROJECT_SETUP_X = -3.7
-
 export const IMAGE_PROJECT_SETUP_SCALE = 1.4
