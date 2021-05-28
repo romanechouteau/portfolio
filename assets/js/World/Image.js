@@ -122,6 +122,8 @@ export default class Image {
     this.hidden = true
     this.bigImage = false
 
+    const x = this.getImageHiddenPositionLeft()
+
     gsap.to(this.image.scale, {
       duration: 1.5,
       x: 1,
@@ -131,7 +133,7 @@ export default class Image {
     })
     gsap.to(this.image.position, {
       duration: 1.5,
-      x: -10,
+      x,
       y: 0,
       ease: 'elastic.out(1, 0.5)',
       onComplete: () => {

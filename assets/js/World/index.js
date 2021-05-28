@@ -210,5 +210,8 @@ export default class World {
     if (!isUndefined(this.image)) {
       this.image.resize()
     }
+    if (!isUndefined(this.aboutImage)) {
+      this.aboutImage.resize()
+    }
   }
 }
