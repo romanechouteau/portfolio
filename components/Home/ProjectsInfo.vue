@@ -3,7 +3,7 @@
     <div
       v-for="(project, key) in pages"
       :key="key"
-      :class="[isSelected(key) ? '' : 'hidden','projectInfo']"
+      :class="[isSelected(key) ? 'show' : '','projectInfo']"
     >
       <HomeProjectsTitle :name="project.name" :custom-class="isSelected(key) ? 'hideRight' : ''" />
       <ProjectCTA :slug="project.slug" type="home" :custom-class="isSelected(key) ? 'hideRight' : ''" />

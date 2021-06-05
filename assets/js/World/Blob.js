@@ -38,7 +38,7 @@ export default class Blob {
     })
 
     this.blob = new Mesh(geometry, this.material)
-    this.blob.position.set(...this.position)
+    this.blob.position.set(15, this.position[1], this.position[2])
     this.blob.scale.set(...this.scale)
 
     this.container.add(this.blob)
@@ -78,6 +78,7 @@ export default class Blob {
         z: position[2],
         ease: 'elastic.out(1, 0.5)'
       })
+      this.position = position
     }
     if (color1) {
       this.color1Target = color1
@@ -85,6 +86,15 @@ export default class Blob {
     if (color2) {
       this.color2Target = color2
     }
+  }
+
+  show () {
+    gsap.to(this.blob.position, {
+      delay: 0.5,
+      duration: 1.5,
+      x: this.position[0],
+      ease: 'elastic.out(1, 0.5)'
+    })
   }
 
   hide () {

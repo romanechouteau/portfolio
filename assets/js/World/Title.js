@@ -64,6 +64,8 @@ export default class Title {
 
     this.setMovement()
 
+    this.show()
+
     this.container.add(...this.romane, ...this.chouteau)
   }
 
@@ -84,7 +86,7 @@ export default class Title {
     this.letterPositions.push([])
     forEach(word, (letter, index) => {
       letter.scale.set(scale, scale, scale)
-      letter.position.set(position, y, 0)
+      letter.position.set(position + 15, y, 0)
       last(this.letterPositions).push(position)
       position += widths[index] + space
     })

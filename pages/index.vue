@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <HomeSubtitle />
-    <HomePagesButtons :pages="pages" />
-    <HomeProjectsInfo :pages="pages.slice(1)" />
+    <Subtitle />
+    <PagesButtons :pages="pages" />
+    <ProjectsInfo :pages="pages.slice(1)" />
   </div>
 </template>
 
@@ -11,20 +11,51 @@ import { gsap } from 'gsap'
 import { mapState } from 'vuex'
 import { get, isFunction, isEqual } from 'lodash'
 
+import Subtitle from '../components/Home/Subtitle'
+import PagesButtons from '../components/Home/PagesButtons'
+import ProjectsInfo from '../components/Home/ProjectsInfo'
+
 export default {
   name: 'Index',
+  components: {
+    Subtitle,
+    PagesButtons,
+    ProjectsInfo
+  },
   transition: {
     mode: '',
     css: false,
+    appear: true,
     enter (el, done) {
-      done()
+      const left = el.querySelector('.pages') ? window.getComputedStyle(el.querySelector('.pages'), null).getPropertyValue('padding-left') : '0px'
+      gsap.fromTo(el.querySelectorAll('.staggerHideLeft'),
+        {
+          left: `-${left}`,
+          translateX: '-200%',
+          opacity: 0
+        },
+        {
+          delay: 0.7,
+          duration: 0.6,
+          left: 0,
+          translateX: 0,
+          opacity: 1,
+          stagger: 0.05,
+          onComplete: done
+        })
     },
     leave (el, done) {
-      gsap.timeline({ onComplete: done })
+      const left = el.querySelector('.pages') ? window.getComputedStyle(el.querySelector('.pages'), null).getPropertyValue('padding-left') : '0px'
+      gsap.timeline({
+        onComplete: () => {
+          done()
+          this.$store.commit('setIndexPage', 0)
+        }
+      })
         .add('start')
         .to(el.querySelectorAll('.staggerHideLeft'), {
           duration: 0.2,
-          left: `-${window.getComputedStyle(el.querySelector('.pages'), null).getPropertyValue('padding-left')}`,
+          left: `-${left}`,
           translateX: '-200%',
           stagger: 0.05
         }, 'start')

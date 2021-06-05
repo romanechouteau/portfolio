@@ -14,8 +14,18 @@
     color: carbon
     font-size: 1.5rem
     transform: translateX(-50%)
-    transition: all 0.7s ease
+    transition: bottom 0.7s ease
+    animation: 0.7s 0.7s backwards showSubtitle
 
     &.hidden
       bottom: -96px
+
+  @keyframes showSubtitle {
+    from {
+      bottom:  -96px
+    }
+    to {
+      bottom: 0
+    }
+  }
 </style>

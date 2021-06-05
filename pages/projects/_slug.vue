@@ -46,10 +46,10 @@ export default {
     },
     leave (el, done) {
       gsap.to(el.children, {
-        duration: 0.6,
+        duration: 0.3,
         translateY: '48px',
         opacity: 0,
-        stagger: 0.2,
+        stagger: 0.1,
         onComplete: done
       })
     }

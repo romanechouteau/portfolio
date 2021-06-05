@@ -41,4 +41,10 @@ export default class Blobs {
       this.blobs[index].hide(blob)
     })
   }
+
+  show () {
+    forEach(this.blobs, (blob, index) => {
+      this.blobs[index].show(blob)
+    })
+  }
 }

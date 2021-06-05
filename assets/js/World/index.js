@@ -50,6 +50,7 @@ export default class World {
   setIndex () {
     if (isUndefined(this.blobs)) {
       this.setBlobs(nth(INDEX_BLOBS_DATA, 0))
+      this.blobs.show()
     } else {
       this.blobs.updateBlobs(nth(INDEX_BLOBS_DATA, 0))
     }

@@ -36,9 +36,10 @@ export default {
       position: absolute
       bottom: 25%
       left: 60%
+      transform: translateX(calc(50vw + 100%))
       transition: transform 0.7s ease
 
-      .hidden &
-        transform: translateX(calc(50vw + 100%))
+      .show &
+        transform: none
 
 </style>
