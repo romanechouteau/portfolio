@@ -4,11 +4,13 @@ import { map, forEach } from 'lodash'
 import Blob from './Blob'
 
 export default class Blobs {
-  constructor ({ time, blobsData }) {
+  constructor ({ time, sizes, camera, blobsData }) {
     this.container = new Object3D()
     this.container.name = 'Blobs'
 
     this.time = time
+    this.sizes = sizes
+    this.camera = camera
     this.blobsData = blobsData
 
     this.setBlobs()
@@ -19,7 +21,9 @@ export default class Blobs {
     this.blobs = map(this.blobsData, ({ scale, color1, color2, position }, offset) => {
       return new Blob({
         time: this.time,
+        sizes: this.sizes,
         scale,
+        camera: this.camera,
         color1,
         color2,
         position,
@@ -30,9 +34,9 @@ export default class Blobs {
     this.container.add(...map(this.blobs, blob => blob.container))
   }
 
-  updateBlobs (data) {
+  updateBlobs (data, delay) {
     forEach(data, (blob, index) => {
-      this.blobs[index].updateBlob(blob)
+      this.blobs[index].updateBlob(blob, delay)
     })
   }
 

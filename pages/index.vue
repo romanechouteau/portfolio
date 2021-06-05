@@ -85,23 +85,23 @@ export default {
   computed: mapState(['worldSetters', 'indexPage']),
   watch: {
     worldSetters (newValue) {
-      this.setIndex(newValue.setHome)
+      this.setIndex(newValue.setHome, true)
     },
     indexPage (newValue) {
       if (!isEqual(newValue, 0)) {
         return this.setProject(this.$store.state.worldSetters.setIndexProject, newValue)
       }
-      return this.setIndex(this.$store.state.worldSetters.setHome)
+      return this.setIndex(this.$store.state.worldSetters.setHome, false)
     }
   },
   mounted () {
     this.$store.commit('setIndexPage', 0)
-    this.setIndex(get(this.$store.state, 'worldSetters.setHome'))
+    this.setIndex(get(this.$store.state, 'worldSetters.setHome'), true)
   },
   methods: {
-    setIndex (setHome) {
+    setIndex (setHome, hasDelay) {
       if (isFunction(setHome)) {
-        setHome()
+        setHome(hasDelay)
       }
     },
     setProject (setIndexProject, key) {

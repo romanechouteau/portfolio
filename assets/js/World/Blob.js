@@ -2,16 +2,19 @@ import { Mesh, Object3D, ShaderMaterial, SphereGeometry } from 'three'
 import { gsap } from 'gsap'
 import { get } from 'lodash'
 
+import { getObjectDimensions, getSizeAtZ } from '../utils/Size'
 import vertexShader from '~/assets/shaders/blob.vert'
 import fragmentShader from '~/assets/shaders/blob.frag'
 
 export default class Blob {
-  constructor ({ time, position, scale, offset, color1, color2 }) {
+  constructor ({ time, sizes, camera, position, scale, offset, color1, color2 }) {
     this.container = new Object3D()
     this.container.name = 'Blob'
 
     this.time = time
+    this.sizes = sizes
     this.scale = scale
+    this.camera = camera
     this.color1 = color1
     this.color2 = color2
     this.color1Target = color1
@@ -26,6 +29,8 @@ export default class Blob {
 
   setBlob () {
     const geometry = new SphereGeometry(1, 64, 64)
+    geometry.computeBoundingBox()
+
     this.material = new ShaderMaterial({
       vertexShader,
       fragmentShader,
@@ -38,8 +43,11 @@ export default class Blob {
     })
 
     this.blob = new Mesh(geometry, this.material)
-    this.blob.position.set(15, this.position[1], this.position[2])
     this.blob.scale.set(...this.scale)
+
+    const { x, y } = this.getBlobHiddenPosition()
+    this.blob.position.set(x, y, this.position[2])
+    this.show()
 
     this.container.add(this.blob)
   }
@@ -54,7 +62,7 @@ export default class Blob {
     })
   }
 
-  updateBlob (data) {
+  updateBlob (data, delay = 0) {
     const scale = get(data, 'scale')
     const position = get(data, 'position')
     const color1 = get(data, 'color1')
@@ -63,6 +71,7 @@ export default class Blob {
 
     if (scale) {
       gsap.to(this.blob.scale, {
+        delay,
         duration,
         x: scale[0],
         y: scale[1],
@@ -72,6 +81,7 @@ export default class Blob {
     }
     if (position) {
       gsap.to(this.blob.position, {
+        delay,
         duration,
         x: position[0],
         y: position[1],
@@ -90,18 +100,35 @@ export default class Blob {
 
   show () {
     gsap.to(this.blob.position, {
-      delay: 0.5,
+      delay: 0.7,
       duration: 1.5,
       x: this.position[0],
+      y: this.position[1],
+      z: this.position[2],
       ease: 'elastic.out(1, 0.5)'
     })
   }
 
   hide () {
+    const { x, y } = this.getBlobHiddenPosition()
     gsap.to(this.blob.position, {
       duration: 1.5,
-      x: 15,
+      x,
+      y,
       ease: 'elastic.out(1, 0.5)'
     })
+  }
+
+  getBlobHiddenPosition () {
+    const angle = Math.atan2(this.position[1], this.position[0])
+    const matrix = this.blob.matrixWorld.clone()
+    const { width, height } = getObjectDimensions(
+      this.blob,
+      matrix
+    )
+    const { width: windowWidth, height: windowHeight } = getSizeAtZ(this.position[2], this.camera.camera, this.sizes)
+    const r = Math.max(windowWidth, windowHeight) + Math.max(width, height)
+
+    return { x: Math.cos(angle) * r, y: Math.sin(angle) * r }
   }
 }

@@ -25,14 +25,21 @@ export const getXPositionningDataAtZ = (z, camera, sizes) => {
   return { left: -(width / 2), width }
 }
 
-export const getObjectXPositionningData = (camera, sizes, object, matrix) => {
+export const getObjectDimensions = (object, matrix) => {
   const box = new Box3()
   box.copy(object.geometry.boundingBox).applyMatrix4(matrix)
 
-  const { left: windowLeft, width: windowWidth } = getXPositionningDataAtZ(object.position.z, camera, sizes)
   const size = new Vector3()
   box.getSize(size)
   const width = get(size, 'x')
+  const height = get(size, 'y')
+
+  return { width, height }
+}
+
+export const getObjectXPositionningData = (camera, sizes, object, matrix) => {
+  const { left: windowLeft, width: windowWidth } = getXPositionningDataAtZ(object.position.z, camera, sizes)
+  const { width } = getObjectDimensions(object, matrix)
 
   return { width, windowLeft, windowWidth }
 }

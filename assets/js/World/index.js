@@ -47,12 +47,13 @@ export default class World {
     this.container.add(this.pointLight.container)
   }
 
-  setIndex () {
+  setIndex (hasDelay) {
     if (isUndefined(this.blobs)) {
       this.setBlobs(nth(INDEX_BLOBS_DATA, 0))
       this.blobs.show()
     } else {
-      this.blobs.updateBlobs(nth(INDEX_BLOBS_DATA, 0))
+      const delay = hasDelay ? 0.5 : 0
+      this.blobs.updateBlobs(nth(INDEX_BLOBS_DATA, 0), delay)
     }
 
     if (isUndefined(this.title)) {
@@ -156,6 +157,8 @@ export default class World {
     if (isUndefined(this.blobs)) {
       this.blobs = new Blobs({
         time: this.time,
+        sizes: this.sizes,
+        camera: this.camera,
         blobsData
       })
       return this.container.add(this.blobs.container)
