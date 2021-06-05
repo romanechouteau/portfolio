@@ -3,6 +3,7 @@ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import { gsap } from 'gsap'
 import { find, forEach, get, isEqual, last, map, reduce, reverse } from 'lodash'
 
+import { getSizeAtZ } from '../utils/Size'
 import pillowlavaSrc from '~/assets/models/pillowlava.fbx'
 import vertexShader from '~/assets/shaders/glass.vert'
 import fragmentShader from '~/assets/shaders/glass.frag'
@@ -12,12 +13,13 @@ import normalFragmentShader from '~/assets/shaders/normal.frag'
 const loader = new FBXLoader()
 
 export default class Title {
-  constructor ({ time, sizes, envMap, backMap }) {
+  constructor ({ time, camera, sizes, envMap, backMap }) {
     this.container = new Object3D()
     this.container.name = 'Title'
 
     this.time = time
     this.sizes = sizes
+    this.camera = camera
     this.envMap = envMap
     this.backMap = backMap
     this.inFrame = true
@@ -84,9 +86,10 @@ export default class Title {
 
     let position = start
     this.letterPositions.push([])
+    const { width: windowWidth } = getSizeAtZ(0, this.camera.camera, this.sizes)
     forEach(word, (letter, index) => {
       letter.scale.set(scale, scale, scale)
-      letter.position.set(position + 15, y, 0)
+      letter.position.set(position + windowWidth, y, 0)
       last(this.letterPositions).push(position)
       position += widths[index] + space
     })
@@ -126,11 +129,12 @@ export default class Title {
 
   hide () {
     this.inFrame = false
+    const { width: windowWidth } = getSizeAtZ(0, this.camera.camera, this.sizes)
     forEach([this.romane, this.chouteau], (word, i) => {
       gsap.to([...map(reverse([...word]), letter => letter.position)], {
         duration: 0.7,
-        x: index => reverse([...this.letterPositions[i]])[index] + 15,
-        stagger: 0.02,
+        x: index => reverse([...this.letterPositions[i]])[index] + windowWidth,
+        stagger: 0.05,
         ease: 'power3.inOut'
       })
     })
@@ -141,7 +145,7 @@ export default class Title {
       gsap.to([...map(word, letter => letter.position)], {
         duration: 0.7,
         x: index => this.letterPositions[i][index],
-        stagger: 0.02,
+        stagger: 0.05,
         ease: 'power3.inOut'
       })
     })

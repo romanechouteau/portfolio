@@ -146,6 +146,7 @@ export default class World {
       this.title = new Title({
         time: this.time,
         sizes: this.sizes,
+        camera: this.camera,
         envMap: this.envMap,
         backMap: this.backMap
       })
