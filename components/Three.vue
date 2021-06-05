@@ -23,9 +23,9 @@ export default {
 </script>
 
 <style lang="stylus">
-    canvas
-        position: absolute
-        top: 0
-        left: 0
-        z-index: -10
+  canvas
+      position: absolute
+      top: 0
+      left: 0
+      z-index: -10
 </style>

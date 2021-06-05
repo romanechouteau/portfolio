@@ -1,19 +1,47 @@
 <template>
   <div class="container">
-    <h2 :class="[$store.state.indexPage === 0 ? '' : 'hidden','subtitle']">
-      creative developer
-    </h2>
+    <HomeSubtitle />
     <HomePagesButtons :pages="pages" />
     <HomeProjectsInfo :pages="pages.slice(1)" />
   </div>
 </template>
 
 <script>
+import { gsap } from 'gsap'
 import { mapState } from 'vuex'
 import { get, isFunction, isEqual } from 'lodash'
 
 export default {
   name: 'Index',
+  transition: {
+    mode: '',
+    css: false,
+    enter (el, done) {
+      done()
+    },
+    leave (el, done) {
+      gsap.timeline({ onComplete: done })
+        .add('start')
+        .to(el.querySelectorAll('.staggerHideLeft'), {
+          duration: 0.2,
+          left: `-${window.getComputedStyle(el.querySelector('.pages'), null).getPropertyValue('padding-left')}`,
+          translateX: '-200%',
+          stagger: 0.05
+        }, 'start')
+        .to(el.querySelectorAll('.hideRight'), {
+          duration: 0.2,
+          left: '100vw',
+          right: 'auto'
+        }, 'start')
+        .to(el.querySelectorAll('.subtitle'), {
+          duration: 0.2,
+          bottom: '-96px'
+        }, 'start')
+      if (isFunction(get(this.$store.state, 'worldSetters.hideIndex'))) {
+        this.$store.state.worldSetters.hideIndex()
+      }
+    }
+  },
   async asyncData ({ $content }) {
     const projects = await $content('projects').fetch()
     return {
@@ -39,11 +67,6 @@ export default {
     this.$store.commit('setIndexPage', 0)
     this.setIndex(get(this.$store.state, 'worldSetters.setHome'))
   },
-  beforeDestroy () {
-    if (isFunction(get(this.$store.state, 'worldSetters.hideIndex'))) {
-      this.$store.state.worldSetters.hideIndex()
-    }
-  },
   methods: {
     setIndex (setHome) {
       if (isFunction(setHome)) {
@@ -59,27 +82,10 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-  body
-    height: 100vh
-    overflow: hidden
-
+<style lang="stylus" scoped>
   .container
-    min-height: 100vh
-    text-align: center
-    margin: 0 auto
-    padding: 48px
-    display: flex
-    justify-content: center
-    align-items: flex-end
-
-    .subtitle
-      font-weight: bold
-      color: carbon
-      font-size: 1.5rem
-      transition: all 0.7s ease
-
-      &.hidden
-        transform: translateY(calc(48px + 5vh))
-
+    position: relative
+    height: 100vh
+    width: 100vw
+    overflow: hidden
 </style>

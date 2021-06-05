@@ -3,7 +3,7 @@
     <button
       v-for="(page, key) in pages"
       :key="key"
-      :class="[isSelected(key) ? 'selected' : '', 'button']"
+      :class="[isSelected(key) ? 'selected' : '', 'button', 'staggerHideLeft']"
       @click="handleClick(key)"
     >
       <PageBlob />
@@ -51,41 +51,41 @@ export default {
 </script>
 
 <style lang="stylus">
-    .pages
-        position: absolute
-        bottom: 0
-        left: 0
-        padding: 48px
-        display: flex
-        flex-direction: column
+  .pages
+    position: absolute
+    bottom: 0
+    left: 0
+    padding: 48px
+    display: flex
+    flex-direction: column
 
-        .button
-            position: relative
-            display: block
-            width: 16px
-            height: 16px
-            margin-top: 16px
-            border: none
-            background-color: transparent
-            outline: none
-            cursor: pointer
-            background-size: contain
-            background-repeat: no-repeat
-            background-position: center
+    .button
+        position: relative
+        display: block
+        width: 16px
+        height: 16px
+        margin-top: 16px
+        border: none
+        background-color: transparent
+        outline: none
+        cursor: pointer
+        background-size: contain
+        background-repeat: no-repeat
+        background-position: center
 
+        svg
+            position: absolute
+            width: 100%
+            height: 100%
+
+            .stroke
+                fill: carbon
+            .fill
+                fill: transparent
+                transition: fill 0.1s ease
+
+        &.selected, &:hover
             svg
-                position: absolute
-                width: 100%
-                height: 100%
-
-                .stroke
-                    fill: carbon
                 .fill
-                    fill: transparent
-                    transition: fill 0.1s ease
-
-            &.selected, &:hover
-                svg
-                    .fill
-                        fill: carbon
+                    fill: carbon
 </style>

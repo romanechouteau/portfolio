@@ -54,7 +54,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ['three/examples/jsm/loaders/FBXLoader'],
+    transpile: ['gsap', 'three/examples/jsm/loaders/FBXLoader'],
     extend (config) {
       if (config.module) {
         config.module.rules.push({ test: /\.(vert|frag)$/i, use: ['raw-loader'] })

@@ -18,10 +18,12 @@
   nav
     width: 100%
     padding: 16px 40px
+    position: fixed
+    top: 0
+    left: 0
     display: flex
     justify-content: space-between
     align-items: center
-    position: fixed
     color: carbon
 
     a
