@@ -12,6 +12,7 @@
         right: -3rem
         width: 12rem
         height: 12rem
+        animation: 0.7s 0.7s backwards showContact
 
         img
             width: 100%
@@ -32,6 +33,15 @@
         }
         to {
             transform: rotate(360deg)
+        }
+    }
+
+    @keyframes showContact {
+        from {
+            transform: translateX(100%)
+        }
+        to {
+            transform: none
         }
     }
 </style>

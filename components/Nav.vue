@@ -25,6 +25,7 @@
     justify-content: space-between
     align-items: center
     color: carbon
+    animation: 0.7s 0.7s backwards showNav
 
     a
       display: inline-block
@@ -40,4 +41,13 @@
         img
           width: 4rem
           height: auto
+
+  @keyframes showNav {
+    from {
+      transform: translateY(-100%)
+    }
+    to {
+      transform: none
+    }
+  }
 </style>
