@@ -134,7 +134,7 @@ export default class Title {
       gsap.to([...map(reverse([...word]), letter => letter.position)], {
         duration: 0.7,
         x: index => reverse([...this.letterPositions[i]])[index] + windowWidth,
-        stagger: 0.05,
+        stagger: 0.02,
         ease: 'power3.inOut'
       })
     })
