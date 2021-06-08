@@ -1,6 +1,6 @@
 <template>
   <h1 :class="['title', customClass]">
-    {{ name }}
+    {{ text }}
   </h1>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   name: 'Title',
   props: {
-    name: { type: String, default: '' },
+    text: { type: String, default: '' },
     customClass: { type: String, default: '' }
   }
 }

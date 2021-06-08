@@ -1,21 +1,22 @@
 <template>
-  <div class="container project">
+  <Right custom-class="project">
     <Back custom-class="project" />
-    <Title :name="project.name" custom-class="project" />
+    <Title :text="project.name" custom-class="project" />
     <Description :text="project.description" custom-class="project" />
-    <CTA type="project" custom-class="project" />
-  </div>
+    <CTA :url="project.link" type="project" custom-class="project" />
+  </Right>
 </template>
 
 <script>
-import { gsap } from 'gsap'
 import { mapState } from 'vuex'
 import { isFunction, nth, get, isEqual } from 'lodash'
 
 import CTA from '../../components/Buttons/CTA'
 import Back from '../../components/Buttons/Back'
 import Title from '../../components/Text/Title'
+import Right from '../../components/Containers/Right'
 import Description from '../../components/Text/Description'
+import { APPEAR_FROM_BOTTOM_TRANSITION } from '~/assets/js/config'
 
 export default {
   name: 'Project',
@@ -23,37 +24,10 @@ export default {
     CTA,
     Back,
     Title,
+    Right,
     Description
   },
-  transition: {
-    mode: '',
-    appear: true,
-    css: false,
-    enter (el, done) {
-      gsap.fromTo(el.children,
-        {
-          translateY: '48px',
-          opacity: 0
-        },
-        {
-          delay: 0.3,
-          duration: 0.6,
-          translateY: '0',
-          opacity: 1,
-          stagger: 0.2,
-          onComplete: done
-        })
-    },
-    leave (el, done) {
-      gsap.to(el.children, {
-        duration: 0.3,
-        translateY: '48px',
-        opacity: 0,
-        stagger: 0.1,
-        onComplete: done
-      })
-    }
-  },
+  transition: APPEAR_FROM_BOTTOM_TRANSITION,
   async asyncData ({ params, $content }) {
     const projects = await $content('projects').where({ slug: params.slug }).fetch()
 

@@ -1,3 +1,4 @@
+import { gsap } from 'gsap'
 import { Color } from 'three'
 
 export const MAIN_BLUE = 0x7287FF
@@ -92,3 +93,33 @@ export const INDEX_BLOBS_DATA = [
 ]
 
 export const IMAGE_PROJECT_SETUP_SCALE = 1.4
+
+export const APPEAR_FROM_BOTTOM_TRANSITION = {
+  mode: '',
+  appear: true,
+  css: false,
+  enter (el, done) {
+    gsap.fromTo(el.children,
+      {
+        translateY: '48px',
+        opacity: 0
+      },
+      {
+        delay: 0.3,
+        duration: 0.6,
+        translateY: '0',
+        opacity: 1,
+        stagger: 0.2,
+        onComplete: done
+      })
+  },
+  leave (el, done) {
+    gsap.to(el.children, {
+      duration: 0.3,
+      translateY: '48px',
+      opacity: 0,
+      stagger: 0.1,
+      onComplete: done
+    })
+  }
+}
