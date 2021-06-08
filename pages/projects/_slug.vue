@@ -12,10 +12,10 @@ import { gsap } from 'gsap'
 import { mapState } from 'vuex'
 import { isFunction, nth, get, isEqual } from 'lodash'
 
-import CTA from '../../components/Project/CTA'
-import Back from '../../components/Project/Back'
-import Title from '../../components/Project/Title'
-import Description from '../../components/Project/Description'
+import CTA from '../../components/Buttons/CTA'
+import Back from '../../components/Buttons/Back'
+import Title from '../../components/Text/Title'
+import Description from '../../components/Text/Description'
 
 export default {
   name: 'Project',

@@ -2,7 +2,7 @@
   <NuxtLink
     v-if="type === 'home'"
     :to="`/projects/${slug}`"
-    :class="['projectCTA', 'absolute', customClass]"
+    :class="['CTA', 'absolute', customClass]"
   >
     see more
   </NuxtLink>
@@ -10,7 +10,7 @@
     v-else
     href="http://www.google.com"
     target="_blank"
-    :class="['projectCTA', customClass]"
+    :class="['CTA', customClass]"
   >
     see project
   </a>
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'ProjectsCTA',
+  name: 'CTA',
   props: {
     slug: { type: String, default: '' },
     type: { type: String, default: 'home' },
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .projectCTA
+  .CTA
     font-weight: bold
     color: carbon
 

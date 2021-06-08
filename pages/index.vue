@@ -11,9 +11,9 @@ import { gsap } from 'gsap'
 import { mapState } from 'vuex'
 import { get, isFunction, isEqual } from 'lodash'
 
-import Subtitle from '../components/Home/Subtitle'
-import PagesButtons from '../components/Home/PagesButtons'
-import ProjectsInfo from '../components/Home/ProjectsInfo'
+import Subtitle from '../components/Text/Subtitle'
+import PagesButtons from '../components/Buttons/Pages'
+import ProjectsInfo from '../components/Text/ProjectsInfo'
 
 export default {
   name: 'Index',

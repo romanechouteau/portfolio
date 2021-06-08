@@ -5,8 +5,8 @@
       :key="key"
       :class="[isSelected(key) ? 'show' : '','projectInfo']"
     >
-      <HomeProjectsTitle :name="project.name" :custom-class="isSelected(key) ? 'hideRight' : ''" />
-      <ProjectCTA :slug="project.slug" type="home" :custom-class="isSelected(key) ? 'hideRight' : ''" />
+      <TextProjectsTitle :name="project.name" :custom-class="isSelected(key) ? 'hideRight' : ''" />
+      <ButtonsCTA :slug="project.slug" type="home" :custom-class="isSelected(key) ? 'hideRight' : ''" />
     </div>
   </div>
 </template>

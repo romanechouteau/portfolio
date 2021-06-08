@@ -17,7 +17,7 @@ import { isEqual, debounce } from 'lodash'
 import PageBlob from '~/assets/svgs/page_blob.inline.svg'
 
 export default {
-  name: 'PageButtons',
+  name: 'Pages',
   components: {
     PageBlob
   },
@@ -60,29 +60,29 @@ export default {
     flex-direction: column
 
     .button
-        position: relative
-        display: block
-        width: 16px
-        height: 16px
-        margin-top: 16px
-        border: none
-        background-color: transparent
-        outline: none
-        cursor: pointer
-        background-size: contain
-        background-repeat: no-repeat
-        background-position: center
+      position: relative
+      display: block
+      width: 16px
+      height: 16px
+      margin-top: 16px
+      border: none
+      background-color: transparent
+      outline: none
+      cursor: pointer
+      background-size: contain
+      background-repeat: no-repeat
+      background-position: center
 
-        svg
-            position: absolute
-            width: 100%
-            height: 100%
+      svg
+        position: absolute
+        width: 100%
+        height: 100%
 
-            .stroke
-                fill: carbon
-            .fill
-                fill: transparent
-                transition: fill 0.1s ease
+        .stroke
+          fill: carbon
+        .fill
+          fill: transparent
+          transition: fill 0.1s ease
 
         &.selected, &:hover
             svg

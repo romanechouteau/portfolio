@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'ProjectsBack',
+  name: 'Back',
   props: {
     customClass: { type: String, default: '' }
   }
