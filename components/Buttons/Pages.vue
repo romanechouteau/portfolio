@@ -80,12 +80,13 @@ export default {
 
         .stroke
           fill: carbon
+
         .fill
           fill: transparent
           transition: fill 0.1s ease
 
-        &.selected, &:hover
-            svg
-                .fill
-                    fill: carbon
+      &.selected, &:hover
+        svg
+          .fill
+              fill: carbon
 </style>
