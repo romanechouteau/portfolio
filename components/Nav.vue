@@ -46,10 +46,14 @@ export default {
 
     a.logo
       margin: 0
+      transition: filter 0.5s ease
 
       img
         width: 4rem
         height: auto
+
+      &:hover
+        filter: drop-shadow(-2px 5px 0px main-yellow)
 
   @keyframes showNav {
     from {
