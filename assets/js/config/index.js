@@ -105,7 +105,7 @@ export const APPEAR_FROM_BOTTOM_TRANSITION = {
         opacity: 0
       },
       {
-        delay: 0.3,
+        delay: 0.5,
         duration: 0.6,
         translateY: '0',
         opacity: 1,

@@ -112,7 +112,7 @@ export default class Blob {
   hide () {
     const { x, y } = this.getBlobHiddenPosition()
     gsap.to(this.blob.position, {
-      duration: 1.5,
+      duration: 2.5,
       x,
       y,
       ease: 'elastic.out(1, 0.5)'
