@@ -8,7 +8,7 @@
   </NuxtLink>
   <a
     v-else
-    href="http://www.google.com"
+    :href="url"
     target="_blank"
     :class="['CTA', customClass]"
   >
@@ -20,6 +20,7 @@
 export default {
   name: 'CTA',
   props: {
+    url: { type: String, default: '' },
     slug: { type: String, default: '' },
     type: { type: String, default: 'home' },
     customClass: { type: String, default: '' }
