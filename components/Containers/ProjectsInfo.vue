@@ -5,8 +5,16 @@
       :key="key"
       :class="[isSelected(key) ? 'show' : '','projectInfo']"
     >
-      <TextProjectsTitle :name="project.name" :custom-class="isSelected(key) ? 'hideRight' : ''" />
-      <ButtonsCTA :slug="project.slug" type="home" :custom-class="isSelected(key) ? 'hideRight' : ''" />
+      <TextProjectsTitle
+        :name="project.name"
+        :custom-class="isSelected(key) ? 'hideRight' : ''"
+      />
+      <ButtonsLink
+        :url="`projects/${project.slug}`"
+        text="see more"
+        type="nuxt"
+        :custom-class="isSelected(key) ? 'hideRight absolute' : 'absolute'"
+      />
     </div>
   </div>
 </template>

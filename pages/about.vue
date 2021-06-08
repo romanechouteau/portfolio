@@ -4,7 +4,13 @@
     <Subtitle :text="subtitle" />
     <Description :text="description" />
     <div class="links">
-      <Link v-for="link, key in links" :key="key" :url="link.url" :text="link.text" />
+      <Link
+        v-for="link, key in links"
+        :key="key"
+        :url="link.url"
+        :text="link.text"
+        custom-class="about"
+      />
     </div>
   </Right>
 </template>

@@ -4,15 +4,30 @@
       <img src="~/assets/images/logo_monogram.svg" alt="Logo of the initials RC in a rounded shape">
     </NuxtLink>
     <div class="links">
-      <NuxtLink to="/">
-        my projects
-      </NuxtLink>
-      <NuxtLink to="/about">
-        about me
-      </NuxtLink>
+      <ButtonsLink
+        url="/"
+        text="my projects"
+        type="nuxt"
+        custom-class="nav"
+      />
+      <ButtonsLink
+        url="/about"
+        text="about me"
+        type="nuxt"
+        custom-class="nav"
+      />
     </div>
   </nav>
 </template>
+
+<script>
+export default {
+  name: 'Nav',
+  props: {
+    customClass: { type: String, default: '' }
+  }
+}
+</script>
 
 <style lang="stylus">
   nav
@@ -27,20 +42,12 @@
     color: carbon
     animation: 0.7s 0.7s backwards showNav
 
-    a
-      display: inline-block
-      color: carbon
-      text-decoration: none
-      font-weight: bold
-      margin-left: 48px
-      padding: 8px
+    a.logo
+      margin: 0
 
-      &.logo
-        margin: 0
-
-        img
-          width: 4rem
-          height: auto
+      img
+        width: 4rem
+        height: auto
 
   @keyframes showNav {
     from {

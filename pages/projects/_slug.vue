@@ -1,9 +1,19 @@
 <template>
   <Right custom-class="project">
     <Back custom-class="project" />
-    <Title :text="project.name" custom-class="project" />
-    <Description :text="project.description" custom-class="project" />
-    <CTA :url="project.link" type="project" custom-class="project" />
+    <Title
+      :text="project.name"
+      custom-class="project"
+    />
+    <Description
+      :text="project.description"
+      custom-class="project"
+    />
+    <Link
+      :url="project.link"
+      text="see project"
+      custom-class="project"
+    />
   </Right>
 </template>
 
@@ -11,7 +21,7 @@
 import { mapState } from 'vuex'
 import { isFunction, nth, get, isEqual } from 'lodash'
 
-import CTA from '../../components/Buttons/CTA'
+import Link from '../../components/Buttons/Link'
 import Back from '../../components/Buttons/Back'
 import Title from '../../components/Text/Title'
 import Right from '../../components/Containers/Right'
@@ -21,7 +31,7 @@ import { APPEAR_FROM_BOTTOM_TRANSITION } from '~/assets/js/config'
 export default {
   name: 'Project',
   components: {
-    CTA,
+    Link,
     Back,
     Title,
     Right,
