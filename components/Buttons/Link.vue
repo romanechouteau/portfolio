@@ -107,7 +107,7 @@ export default {
         &.absolute
             position: absolute
             bottom: 25%
-            left: 60%
+            left: 55%
             transform: translateX(calc(50vw + 100%))
             transition: transform 0.7s ease
 

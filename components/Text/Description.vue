@@ -1,7 +1,9 @@
 <template>
-  <p :class="['description', customClass]">
-    {{ text }}
-  </p>
+  <div :class="['description', customClass]">
+    <p v-for="(paragraph, key) in paragraphs" :key="key">
+      {{ paragraph }}
+    </p>
+  </div>
 </template>
 
 <script>
@@ -10,6 +12,11 @@ export default {
   props: {
     text: { type: String, default: '' },
     customClass: { type: String, default: '' }
+  },
+  computed: {
+    paragraphs () {
+      return this.$props.text.split('<br>')
+    }
   }
 }
 </script>
@@ -17,4 +24,5 @@ export default {
 <style lang="stylus" scoped>
   .description
     margin-bottom: 24px
+    line-height: 1.5
 </style>
