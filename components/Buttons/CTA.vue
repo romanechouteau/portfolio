@@ -32,6 +32,7 @@ export default {
   .CTA
     font-weight: bold
     color: carbon
+    text-decoration: none
 
     &.absolute
       position: absolute

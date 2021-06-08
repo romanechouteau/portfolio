@@ -13,7 +13,7 @@ import { get, isFunction, isEqual } from 'lodash'
 
 import Subtitle from '../components/Text/BottomSubtitle'
 import PagesButtons from '../components/Buttons/Pages'
-import ProjectsInfo from '../components/Text/ProjectsInfo'
+import ProjectsInfo from '../components/Containers/ProjectsInfo'
 
 export default {
   name: 'Index',

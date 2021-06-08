@@ -15,5 +15,8 @@ export default {
 
 <style lang="stylus" scoped>
   .back
-      margin-bottom: 24px
+    margin-bottom: 24px
+    color: carbon
+    font-weight: bold
+    text-decoration: none
 </style>
