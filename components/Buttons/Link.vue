@@ -22,7 +22,7 @@ export default {
 <style lang="stylus" scoped>
   .link
     padding: 8px
-    margin-right: 8px
+    margin-right: 48px
     color: carbon
     font-weight: bold
     text-decoration: none
