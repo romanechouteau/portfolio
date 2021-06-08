@@ -12,6 +12,7 @@
         right: -3rem
         width: 12rem
         height: 12rem
+        transition: filter 0.5s ease
         animation: 0.7s 0.7s backwards showContact
 
         img
@@ -26,6 +27,9 @@
 
             &.text
                 animation: 20s linear infinite reverse rotate
+
+        &:hover
+            filter: drop-shadow(-2px 5px 0px main-yellow)
 
     @keyframes rotate {
         from {
