@@ -9,6 +9,7 @@
         :key="key"
         :url="link.url"
         :text="link.text"
+        :decoration="link.decoration"
         custom-class="about"
       />
     </div>

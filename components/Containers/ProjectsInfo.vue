@@ -13,6 +13,7 @@
         :url="`projects/${project.slug}`"
         text="see more"
         type="nuxt"
+        decoration="arrow"
         :custom-class="isSelected(key) ? 'hideRight absolute' : 'absolute'"
       />
     </div>

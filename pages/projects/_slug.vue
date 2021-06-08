@@ -1,6 +1,12 @@
 <template>
   <Right custom-class="project">
-    <Back custom-class="project" />
+    <Link
+      url="/"
+      text="back"
+      type="nuxt"
+      decoration="arrowBack"
+      custom-class="project back"
+    />
     <Title
       :text="project.name"
       custom-class="project"
@@ -12,6 +18,7 @@
     <Link
       :url="project.link"
       text="see project"
+      decoration="arrowCurly"
       custom-class="project"
     />
   </Right>
@@ -22,7 +29,6 @@ import { mapState } from 'vuex'
 import { isFunction, nth, get, isEqual } from 'lodash'
 
 import Link from '../../components/Buttons/Link'
-import Back from '../../components/Buttons/Back'
 import Title from '../../components/Text/Title'
 import Right from '../../components/Containers/Right'
 import Description from '../../components/Text/Description'
@@ -32,7 +38,6 @@ export default {
   name: 'Project',
   components: {
     Link,
-    Back,
     Title,
     Right,
     Description

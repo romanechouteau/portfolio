@@ -8,12 +8,14 @@
         url="/"
         text="my projects"
         type="nuxt"
+        decoration="waves"
         custom-class="nav"
       />
       <ButtonsLink
         url="/about"
         text="about me"
         type="nuxt"
+        decoration="underline"
         custom-class="nav"
       />
     </div>
