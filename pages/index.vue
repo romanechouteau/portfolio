@@ -11,7 +11,7 @@ import { gsap } from 'gsap'
 import { mapState } from 'vuex'
 import { get, isFunction, isEqual } from 'lodash'
 
-import Subtitle from '../components/Text/Subtitle'
+import Subtitle from '../components/Text/BottomSubtitle'
 import PagesButtons from '../components/Buttons/Pages'
 import ProjectsInfo from '../components/Text/ProjectsInfo'
 
