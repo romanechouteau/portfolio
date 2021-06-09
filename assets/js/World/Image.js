@@ -36,7 +36,11 @@ export default class Image {
     const geometry = new PlaneGeometry(3.33, 5, 10, 10)
     geometry.computeBoundingBox()
 
-    this.imageSrc = require(`~/assets/images/${this.key}.jpg`)
+    try {
+      this.imageSrc = require(`~/assets/images/${this.key}.png`)
+    } catch (err) {
+      this.imageSrc = require(`~/assets/images/${this.key}.jpg`)
+    }
 
     this.texture = textureLoader.load(this.imageSrc)
 
