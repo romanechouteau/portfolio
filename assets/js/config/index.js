@@ -89,6 +89,120 @@ export const INDEX_BLOBS_DATA = [
       color1: new Color(MAIN_BLUE),
       color2: new Color(SECONDARY_BLUE)
     }
+  ],
+  [
+    {
+      scale: [2.5, 1.5, 0.5],
+      position: [-3, -3, -2],
+      color1: new Color(MAIN_BLUE),
+      color2: new Color(SECONDARY_BLUE)
+    },
+    {
+      scale: [2, 2, 0.5],
+      position: [3, -2, -2],
+      color1: new Color(MAIN_RED),
+      color2: new Color(SECONDARY_RED)
+    },
+    {
+      scale: [1.2, 2, 0.5],
+      position: [3, 1, 0],
+      color1: new Color(MAIN_YELLOW),
+      color2: new Color(SECONDARY_YELLOW)
+    },
+    {
+      scale: [1.3, 1.3, 0.5],
+      position: [-2, 2, -1],
+      color1: new Color(MAIN_YELLOW),
+      color2: new Color(SECONDARY_YELLOW)
+    },
+    {
+      scale: [2.5, 2, 0.5],
+      position: [-4, 0, -1.5],
+      color1: new Color(MAIN_GREEN),
+      color2: new Color(SECONDARY_GREEN)
+    },
+    {
+      scale: [1, 1, 0.5],
+      position: [1, 2, 0.5],
+      color1: new Color(MAIN_BLUE),
+      color2: new Color(SECONDARY_BLUE)
+    }
+  ],
+  [
+    {
+      scale: [1.5, 1.5, 0.5],
+      position: [3, 2, -2],
+      color1: new Color(MAIN_BLUE),
+      color2: new Color(SECONDARY_BLUE)
+    },
+    {
+      scale: [3, 2, 0.5],
+      position: [-3, -2, -2],
+      color1: new Color(MAIN_RED),
+      color2: new Color(SECONDARY_RED)
+    },
+    {
+      scale: [1.2, 1.5, 0.5],
+      position: [4, 0, 0],
+      color1: new Color(MAIN_YELLOW),
+      color2: new Color(SECONDARY_YELLOW)
+    },
+    {
+      scale: [0.8, 0.8, 0.5],
+      position: [-3, 1, -1],
+      color1: new Color(MAIN_YELLOW),
+      color2: new Color(SECONDARY_YELLOW)
+    },
+    {
+      scale: [2, 1, 0.5],
+      position: [3, -2, 0.5],
+      color1: new Color(MAIN_GREEN),
+      color2: new Color(SECONDARY_GREEN)
+    },
+    {
+      scale: [2, 1, 0.5],
+      position: [-3, 2, 0.5],
+      color1: new Color(MAIN_BLUE),
+      color2: new Color(SECONDARY_BLUE)
+    }
+  ],
+  [
+    {
+      scale: [2, 1.5, 0.5],
+      position: [-2, -2, 0.5],
+      color1: new Color(MAIN_BLUE),
+      color2: new Color(SECONDARY_BLUE)
+    },
+    {
+      scale: [1, 2, 0.5],
+      position: [3.5, 0, -0.5],
+      color1: new Color(MAIN_RED),
+      color2: new Color(SECONDARY_RED)
+    },
+    {
+      scale: [1, 1.5, 0.5],
+      position: [-2.5, 2, -1],
+      color1: new Color(MAIN_YELLOW),
+      color2: new Color(SECONDARY_YELLOW)
+    },
+    {
+      scale: [1.5, 1, 0.5],
+      position: [2, -2, -1],
+      color1: new Color(MAIN_YELLOW),
+      color2: new Color(SECONDARY_YELLOW)
+    },
+    {
+      scale: [1.5, 1.5, 0.5],
+      position: [3, 2, -1],
+      color1: new Color(MAIN_GREEN),
+      color2: new Color(SECONDARY_GREEN)
+    },
+    {
+      scale: [1, 1, 0.5],
+      position: [-3.5, 1, 0.5],
+      color1: new Color(MAIN_BLUE),
+      color2: new Color(SECONDARY_BLUE)
+    }
   ]
 ]
 
@@ -101,7 +215,7 @@ export const APPEAR_FROM_BOTTOM_TRANSITION = {
   enter (el, done) {
     gsap.fromTo(el.children,
       {
-        translateY: '48px',
+        translateY: '3rem',
         opacity: 0
       },
       {
@@ -116,7 +230,7 @@ export const APPEAR_FROM_BOTTOM_TRANSITION = {
   leave (el, done) {
     gsap.to(el.children, {
       duration: 0.3,
-      translateY: '48px',
+      translateY: '3rem',
       opacity: 0,
       stagger: 0.1,
       onComplete: done
