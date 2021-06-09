@@ -34,7 +34,7 @@ export default {
 <style lang="stylus">
   nav
     width: 100%
-    padding: 16px 40px
+    padding: 1rem 2.5rem
     position: fixed
     top: 0
     left: 0

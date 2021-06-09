@@ -17,5 +17,5 @@ export default {
 <style lang="stylus" scoped>
   .subtitle
     font-size: 2rem
-    margin-bottom: 48px
+    margin-bottom: 3rem
 </style>

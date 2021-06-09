@@ -9,7 +9,7 @@
     position: absolute
     bottom: 0
     left: 50%
-    padding: 48px
+    padding: 3rem
     font-weight: bold
     color: carbon
     font-size: 1.5rem
@@ -18,11 +18,11 @@
     animation: 0.7s 0.7s backwards showSubtitle
 
     &.hidden
-      bottom: -96px
+      bottom: -6rem
 
   @keyframes showSubtitle {
     from {
-      bottom:  -96px
+      bottom:  -6rem
     }
     to {
       bottom: 0

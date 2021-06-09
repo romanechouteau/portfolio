@@ -66,7 +66,7 @@ export default {
         }, 'start')
         .to(el.querySelectorAll('.subtitle'), {
           duration: 0.2,
-          bottom: '-96px'
+          bottom: '-6rem'
         }, 'start')
       if (isFunction(get(this.$store.state, 'worldSetters.hideIndex'))) {
         this.$store.state.worldSetters.hideIndex()

@@ -55,16 +55,16 @@ export default {
     position: absolute
     bottom: 0
     left: 0
-    padding: 48px
+    padding: 3rem
     display: flex
     flex-direction: column
 
     .button
       position: relative
       display: block
-      width: 16px
-      height: 16px
-      margin-top: 16px
+      width: 1rem
+      height: 1rem
+      margin-top: 1rem
       border: none
       background-color: transparent
       outline: none

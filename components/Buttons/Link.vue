@@ -72,13 +72,13 @@ export default {
         & a
             color: carbon
             text-decoration: none
-            padding: 8px
+            padding: 0.5rem
 
         .decoration
             opacity: 1
             position: absolute
             width: 80%
-            top: calc(100% - 2px)
+            top: calc(100% - 0.25rem)
             left: 50%
             transform: translateX(-50%)
             z-index: -1
@@ -96,13 +96,13 @@ export default {
                 stroke-dashoffset: 0!important
 
         &.about
-            margin-right: 48px
+            margin-right: 3rem
 
         &.back
-            margin-bottom: 24px
+            margin-bottom: 1.5rem
 
         &.nav
-            margin-left: 48px
+            margin-left: 3rem
 
         &.absolute
             position: absolute

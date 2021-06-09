@@ -23,6 +23,6 @@ export default {
 
 <style lang="stylus" scoped>
   .description
-    margin-bottom: 24px
+    margin-bottom: 3rem
     line-height: 1.5
 </style>
