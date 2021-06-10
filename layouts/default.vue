@@ -4,6 +4,7 @@
     <Three />
     <Contact />
     <Nav />
+    <CustomCursor />
   </div>
 </template>
 

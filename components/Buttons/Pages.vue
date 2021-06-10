@@ -1,5 +1,5 @@
 <template>
-  <div class="pages">
+  <div ref="link" class="pages">
     <button
       v-for="(page, key) in pages"
       :key="key"
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { gsap } from 'gsap'
 import { isEqual, debounce } from 'lodash'
 
 import PageBlob from '~/assets/svgs/page_blob.inline.svg'
@@ -30,6 +31,20 @@ export default {
   },
   beforeDestroy () {
     window.removeEventListener('wheel', this.scrollHandler)
+  },
+  mounted () {
+    this.$refs.link.addEventListener('mouseenter', () => {
+      gsap.to('.cursor', {
+        duration: 0.5,
+        opacity: 0
+      })
+    })
+    this.$refs.link.addEventListener('mouseleave', () => {
+      gsap.to('.cursor', {
+        duration: 0.5,
+        opacity: 1
+      })
+    })
   },
   methods: {
     handleClick (key) {

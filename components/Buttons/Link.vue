@@ -1,5 +1,5 @@
 <template>
-  <div :class="['link', customClass]">
+  <div ref="link" :class="['link', customClass]">
     <NuxtLink
       v-if="type === 'nuxt'"
       :to="url"
@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import { gsap } from 'gsap'
+
 import Waves from '~/assets/svgs/waves.inline.svg'
 import Arrow from '~/assets/svgs/arrow.inline.svg'
 import Cloud from '~/assets/svgs/cloud.inline.svg'
@@ -57,6 +59,19 @@ export default {
     document.querySelectorAll('path').forEach((elem) => {
       elem.style.strokeDashoffset = elem.getTotalLength()
       elem.style.strokeDasharray = elem.getTotalLength()
+    })
+
+    this.$refs.link.addEventListener('mouseenter', () => {
+      gsap.to('.cursor', {
+        duration: 0.5,
+        opacity: 0
+      })
+    })
+    this.$refs.link.addEventListener('mouseleave', () => {
+      gsap.to('.cursor', {
+        duration: 0.5,
+        opacity: 1
+      })
     })
   }
 }

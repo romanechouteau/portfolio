@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <NuxtLink to="/" class="logo">
+    <NuxtLink ref="link" to="/" class="logo">
       <img src="~/assets/images/logo_monogram.svg" alt="Logo of the initials RC in a rounded shape">
     </NuxtLink>
     <div class="links">
@@ -23,10 +23,26 @@
 </template>
 
 <script>
+import { gsap } from 'gsap'
+
 export default {
   name: 'Nav',
   props: {
     customClass: { type: String, default: '' }
+  },
+  mounted () {
+    this.$refs.link.$el.addEventListener('mouseenter', () => {
+      gsap.to('.cursor', {
+        duration: 0.5,
+        opacity: 0
+      })
+    })
+    this.$refs.link.$el.addEventListener('mouseleave', () => {
+      gsap.to('.cursor', {
+        duration: 0.5,
+        opacity: 1
+      })
+    })
   }
 }
 </script>

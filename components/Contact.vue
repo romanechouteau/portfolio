@@ -1,9 +1,31 @@
 <template>
-  <a href="mailto:romane.chouteau@gmail.com" class="contact" aria-label="Get in touch with me via email">
+  <a ref="link" href="mailto:romane.chouteau@gmail.com" class="contact" aria-label="Get in touch with me via email">
     <img src="~/assets/images/smiley_contact.svg" class="smiley" alt="Smiley face">
     <img src="~/assets/images/text_contact.svg" class="text" alt="Get in touch">
   </a>
 </template>
+
+<script>
+import { gsap } from 'gsap'
+
+export default {
+  name: 'Contact',
+  mounted () {
+    this.$refs.link.addEventListener('mouseenter', () => {
+      gsap.to('.cursor', {
+        duration: 0.5,
+        opacity: 0
+      })
+    })
+    this.$refs.link.addEventListener('mouseleave', () => {
+      gsap.to('.cursor', {
+        duration: 0.5,
+        opacity: 1
+      })
+    })
+  }
+}
+</script>
 
 <style lang="stylus">
     .contact
