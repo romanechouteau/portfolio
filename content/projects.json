@@ -3,28 +3,28 @@
         "id": 0,
         "name": "mirage festival",
         "slug": "mirage",
-        "link": "https://google.com",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        "link": "https://mirage-scbc.netlify.app/",
+        "description": "Mirage Festival is a web experience that pays tribute to the event that took place in Lyon for 8 years, promoting artistic innovation and digital creation. Our goal was to offer a digital experience inspired by the 2019 exposition, so that people could get a taste of the event from their own home.<br>Our team, regrouping 2 developers and 2 designers, created this project over the course of two weeks in December 2020, as an assignment for my Bachelor’s degree at Gobelins."
     },
     {
         "id": 1,
         "name": "specimen BDDI",
         "slug": "dataviz",
-        "link": "https://google.com",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        "link": "https://specimen-bddi.netlify.app/",
+        "description": "Specimen BDDI is a website that offers a fun way of discovering the BDDI (Bachelor Développeur et Designer Interactif) class of 2021. This project’s goal was to learn about data visualization as a pair of 1 designer and 1 developer, through the theme of our choice. We decided to depict our class through the average specimen : Specimen BDDI.<br>We created this project over the course of one week in October 2020, as an assignment for my Bachelor’s degree at Gobelins. It is only a proof of concept : we focused on creating a few graphs, viewable through the computer and the phone icons."
     },
     {
         "id": 2,
         "name" : "little nightclub",
         "slug": "nightclub",
-        "link": "https://google.com",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        "link": "https://little-nightclub.netlify.app/",
+        "description": "Little Nightclub is a fun web experience that allows the user to clap to a rhythm and see a character dance to a music of the same rhythm. My goal was to discover 3D for the web, and make use an unusual user input : the microphone.<br>I created this project over the course of one week in September 2020, as an assignment for my Bachelor’s degree at Gobelins."
     },
     {
         "id": 3,
         "name" : "peaceful field",
         "slug": "field",
         "link": "https://google.com",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        "description": "Peaceful field is a small web experience immersing the user in a peaceful field of grass, swaying in the wind.<br>I created this project in June 2021 as a practice Three.js and shaders. "
     }
 ]
