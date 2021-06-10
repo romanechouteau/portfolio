@@ -85,7 +85,7 @@ export const INDEX_BLOBS_DATA = [
     },
     {
       scale: [2, 1.5, 0.5],
-      position: [-1, -2, 0.5],
+      position: [-2, -2, 0.5],
       color1: new Color(MAIN_BLUE),
       color2: new Color(SECONDARY_BLUE)
     }
