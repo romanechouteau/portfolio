@@ -19,12 +19,5 @@
         "slug": "nightclub",
         "link": "https://little-nightclub.netlify.app/",
         "description": "Little Nightclub is a fun web experience that allows the user to clap to a rhythm and see a character dance to a music of the same rhythm. My goal was to discover 3D for the web, and make use of an unusual user input : the microphone.<br>I created this project over the course of one week in September 2020, as an assignment for my Bachelor’s degree at Gobelins."
-    },
-    {
-        "id": 3,
-        "name" : "peaceful field",
-        "slug": "field",
-        "link": "https://google.com",
-        "description": "Peaceful field is a small web experience immersing the user in a peaceful field of grass, swaying in the wind.<br>I created this project in June 2021 as a practice Three.js and shaders. "
     }
 ]
