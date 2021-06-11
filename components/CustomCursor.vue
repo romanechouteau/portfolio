@@ -42,6 +42,8 @@ export default {
     height: 64px
     position: fixed
     pointer-events: none
+    top: -64px
+    left: 50%
     transform: translate(-50%, -50%)
 
     &.white
