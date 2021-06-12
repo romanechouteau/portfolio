@@ -13,6 +13,7 @@
     font-weight: bold
     color: carbon
     font-size: 1.5rem
+    text-align: center
     transform: translateX(-50%)
     transition: bottom 0.7s ease
     animation: 0.7s 0.7s backwards showSubtitle
