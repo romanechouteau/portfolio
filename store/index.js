@@ -1,6 +1,7 @@
 export const state = () => ({
   worldSetters: { },
-  indexPage: 0
+  indexPage: 0,
+  ready: false
 })
 
 export const mutations = {
@@ -9,5 +10,8 @@ export const mutations = {
   },
   setIndexPage (state, payload) {
     state.indexPage = payload
+  },
+  isReady (state) {
+    state.ready = true
   }
 }

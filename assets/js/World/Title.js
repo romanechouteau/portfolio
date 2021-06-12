@@ -1,24 +1,21 @@
 import { Object3D, ShaderMaterial } from 'three'
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import { gsap } from 'gsap'
 import { find, forEach, get, isEqual, last, map, reduce, reverse } from 'lodash'
 
 import { getSizeAtZ } from '../utils/Size'
-import pillowlavaSrc from '~/assets/models/pillowlava.fbx'
 import vertexShader from '~/assets/shaders/glass.vert'
 import fragmentShader from '~/assets/shaders/glass.frag'
 import normalVertexShader from '~/assets/shaders/normal.vert'
 import normalFragmentShader from '~/assets/shaders/normal.frag'
 
-const loader = new FBXLoader()
-
 export default class Title {
-  constructor ({ time, camera, sizes, envMap, backMap }) {
+  constructor ({ time, assets, camera, sizes, envMap, backMap }) {
     this.container = new Object3D()
     this.container.name = 'Title'
 
     this.time = time
     this.sizes = sizes
+    this.assets = assets
     this.camera = camera
     this.envMap = envMap
     this.backMap = backMap
@@ -40,8 +37,8 @@ export default class Title {
     return find(get(group, 'children'), child => reduce(names, (acc, name) => acc || isEqual(get(child, 'name'), name), false))
   }
 
-  async setTitle () {
-    const alphabet = (await loader.loadAsync(pillowlavaSrc))
+  setTitle () {
+    const alphabet = this.assets.models.pillowlava
     const letters = this.findByName(alphabet, ['a_z'])
     this.romane = map('romane', letter => this.findByName(letters, [`pilowlava_${letter}_for_sds`, `pilowlava_${letter}1_for_sds`]).clone())
     this.chouteau = map('chouteau', letter => this.findByName(letters, [`pilowlava_${letter}_for_sds`, `pilowlava_${letter}1_for_sds`]).clone())

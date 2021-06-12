@@ -11,12 +11,13 @@ import PointLight from './PointLight'
 import AmbiantLight from './AmbiantLight'
 
 export default class World {
-  constructor ({ time, sizes, camera, envMap, backMap }) {
+  constructor ({ time, sizes, assets, camera, envMap, backMap }) {
     this.container = new Object3D()
     this.container.name = 'World'
 
     this.time = time
     this.sizes = sizes
+    this.assets = assets
     this.camera = camera
     this.envMap = envMap
     this.backMap = backMap
@@ -146,6 +147,7 @@ export default class World {
       this.title = new Title({
         time: this.time,
         sizes: this.sizes,
+        assets: this.assets,
         camera: this.camera,
         envMap: this.envMap,
         backMap: this.backMap
@@ -172,6 +174,7 @@ export default class World {
         key: key + 1,
         time: this.time,
         sizes: this.sizes,
+        assets: this.assets,
         camera: this.camera
       })
       img.resetImageY(-1)
@@ -185,6 +188,7 @@ export default class World {
       key,
       time: this.time,
       sizes: this.sizes,
+      assets: this.assets,
       camera: this.camera
     })
     this[classKey].resetImageX(-1)

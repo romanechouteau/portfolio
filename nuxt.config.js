@@ -60,7 +60,15 @@ export default {
       if (config.module) {
         config.module.rules.push({ test: /\.(vert|frag)$/i, use: ['raw-loader'] })
         config.module.rules.push({ test: /\.(glb|gltf)$/, use: ['file-loader'] })
-        config.module.rules.push({ test: /\.(fbx|obj)$/, use: ['file-loader'] })
+        config.module.rules.push({
+          test: /\.(fbx|obj)$/,
+          use: {
+            loader: 'file-loader',
+            options: {
+              esModule: false
+            }
+          }
+        })
         config.module.rules.push({ test: /\.(ogg|mp3|wav|mpe?g)$/i, use: ['file-loader'] })
 
         const svgRule = config.module.rules.find(rule => rule.test.test('.svg'))

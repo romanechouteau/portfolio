@@ -1,8 +1,15 @@
 
-import { Scene, WebGLRenderer, sRGBEncoding, WebGLRenderTarget } from 'three'
+import { Scene, WebGLRenderer, sRGBEncoding, WebGLRenderTarget, TextureLoader } from 'three'
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
+import { get, map } from 'lodash'
+
+import projects from '../../content/projects.json'
 import Time from './utils/Time'
 import World from './World'
 import Camera from './Camera'
+
+const textureLoader = new TextureLoader()
+const fbxLoader = new FBXLoader()
 
 export default class App {
   constructor () {
@@ -13,10 +20,52 @@ export default class App {
       height: window.innerHeight,
       pixelRatio: Math.min(window.devicePixelRatio, 2)
     }
+    this.assets = {
+      textures: {},
+      models: {}
+    }
+    this.projects = projects
+  }
 
+  async init () {
+    await this.loadScene()
     this.setRenderer()
     this.setCamera()
     this.setWorld()
+  }
+
+  async loadScene () {
+    const textures = [
+      'about',
+      ...map(projects, project => `project${get(project, 'id') + 1}`)
+    ]
+    const models = ['pillowlava']
+
+    await Promise.all([
+      ...map(textures, async (textureName) => {
+        await this.loadTexture(textureName)
+      }),
+      ...map(models, async (modelName) => {
+        await this.loadModel(modelName)
+      })
+    ])
+  }
+
+  async loadTexture (textureName) {
+    let imageSrc
+    try {
+      imageSrc = require(`~/assets/images/textures/${textureName}.png`)
+    } catch (err) {
+      imageSrc = require(`~/assets/images/textures/${textureName}.jpg`)
+    }
+
+    this.assets.textures[textureName] = (await textureLoader.loadAsync(imageSrc))
+  }
+
+  async loadModel (modelName) {
+    const modelSrc = require(`~/assets/models/${modelName}.fbx`)
+
+    this.assets.models[modelName] = (await fbxLoader.loadAsync(modelSrc))
   }
 
   setCamera () {
@@ -92,6 +141,7 @@ export default class App {
     this.world = new World({
       time: this.time,
       sizes: this.sizes,
+      assets: this.assets,
       camera: this.camera,
       envMap: this.envFBO.texture,
       backMap: this.backFBO.texture

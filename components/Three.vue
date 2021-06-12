@@ -7,8 +7,10 @@ import App from '~/assets/js/App.js'
 
 export default {
   name: 'Three',
-  mounted () {
+  async mounted () {
     const app = new App()
+    await app.init()
+    this.$emit('loaded')
     this.$store.commit('setWorldSetters', {
       setHome: app.world.setIndex,
       setIndexProject: app.world.setIndexProject,

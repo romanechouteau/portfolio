@@ -1,17 +1,14 @@
-import { LoadingManager, Mesh, Object3D, PlaneGeometry, ShaderMaterial, TextureLoader } from 'three'
+import { Mesh, Object3D, PlaneGeometry, ShaderMaterial } from 'three'
 import { gsap } from 'gsap'
-import { isEqual, isNumber } from 'lodash'
+import { get, isEqual, isNumber } from 'lodash'
 
 import vertexShader from '../../shaders/image.vert'
 import fragmentShader from '../../shaders/image.frag'
 import { IMAGE_PROJECT_SETUP_SCALE } from '../config'
 import { getObjectXPositionningData } from '../utils/Size'
 
-const manager = new LoadingManager()
-const textureLoader = new TextureLoader(manager)
-
 export default class Image {
-  constructor ({ key, time, sizes, camera }) {
+  constructor ({ key, time, sizes, assets, camera }) {
     this.container = new Object3D()
     this.container.name = 'Image'
 
@@ -24,6 +21,7 @@ export default class Image {
     }
     this.time = time
     this.sizes = sizes
+    this.assets = assets
     this.camera = camera
     this.hidden = true
     this.bigImage = false
@@ -36,13 +34,7 @@ export default class Image {
     const geometry = new PlaneGeometry(3.33, 5, 10, 10)
     geometry.computeBoundingBox()
 
-    try {
-      this.imageSrc = require(`~/assets/images/${this.key}.png`)
-    } catch (err) {
-      this.imageSrc = require(`~/assets/images/${this.key}.jpg`)
-    }
-
-    this.texture = textureLoader.load(this.imageSrc)
+    this.texture = get(this.assets.textures, this.key)
 
     this.material = new ShaderMaterial({
       uniforms: {
