@@ -15,7 +15,7 @@ export const mutations = {
   isReady (state) {
     state.ready = true
   },
-  toggleBurger (state) {
-    state.burgerShow = !state.burgerShow
+  toggleBurger (state, payload) {
+    state.burgerShow = payload
   }
 }

@@ -3,6 +3,7 @@
     <NuxtLink
       v-if="type === 'nuxt'"
       :to="url"
+      @click.native="onClick"
     >
       {{ text }}
     </NuxtLink>
@@ -11,6 +12,7 @@
       :href="url"
       target="_blank"
       rel="noopener noreferrer"
+      @click="onClick"
     >
       {{ text }}
     </a>
@@ -74,6 +76,12 @@ export default {
         opacity: 1
       })
     })
+  },
+  methods: {
+    onClick () {
+      console.log('hello')
+      this.$store.commit('toggleBurger', false)
+    }
   }
 }
 </script>

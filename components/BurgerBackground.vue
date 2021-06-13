@@ -47,7 +47,7 @@ export default {
         ease: 'power3.inOut',
         onComplete (show) {
           if (!show) {
-            document.querySelector('.links').style.display = 'none'
+            document.querySelector('nav .links').style.display = 'none'
             document.querySelector('.background').style.display = 'none'
           }
         },
@@ -59,35 +59,35 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-    .background
-        position: absolute
-        left: 0
-        top: 100vh
-        width: 100vh
-        height: 100vw
-        display: none
-        align-items: flex-end
-        transform: rotate(-90deg)
-        transform-origin: top left
+  .background
+    position: absolute
+    left: 0
+    top: 100vh
+    width: 100vh
+    height: 100vw
+    display: none
+    align-items: flex-end
+    transform: rotate(-90deg)
+    transform-origin: top left
 
-        .divider
-            display: flex
-            width: 100%
+    .divider
+        display: flex
+        width: 100%
+        height: 0
+        flex-direction: column
+        justify-content: flex-end
+        transform-origin: bottom center
+
+        svg
+            position: relative
+            display: block
+            width: calc(195% + 1.3px)
             height: 0
-            flex-direction: column
-            justify-content: flex-end
-            transform-origin: bottom center
 
-            svg
-                position: relative
-                display: block
-                width: calc(195% + 1.3px)
-                height: 0
+        .fill-divider
+            flex-grow: 1
+            background-color: light-blue
 
-            .fill-divider
-                flex-grow: 1
-                background-color: light-blue
-
-            .shape-fill
-                fill: light-blue
+        .shape-fill
+            fill: light-blue
 </style>

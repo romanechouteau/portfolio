@@ -31,8 +31,12 @@ export default {
 </script>
 
 <style lang="stylus">
+  html, body, #__nuxt, #__layout
+    width: 100%
+    height: 100%
+
   .layout
-    min-height: 100vh
+    height: 100%
     width: 100%
     display: flex
     justify-content: flex-start

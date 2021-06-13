@@ -74,12 +74,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .links
-    display: flex
-    flex-direction: row
-    justify-content: flex-start
-    align-items: center
-
-    .placeholderLink
-      padding: 0.5rem
+  .about
+    .links
+      display: flex
+      flex-direction: row
+      justify-content: flex-start
+      align-items: center
 </style>

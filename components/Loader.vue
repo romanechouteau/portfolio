@@ -107,45 +107,47 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-    .loader
-        position: relative
-        width: 100vw
-        height: 100vh
-        overflow: hidden
+  .loader
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    overflow: hidden
 
-        .smiley
-            position: absolute
-            top: 50%
-            left: 50%
-            width: 8rem
-            height: 8rem
-            opacity: 0
-            transform: translate(-50%, -50%)
+    .smiley
+        position: absolute
+        top: 50%
+        left: 50%
+        width: 8rem
+        height: 8rem
+        opacity: 0
+        transform: translate(-50%, -50%)
 
-        .divider
-            position: absolute
-            left: 0
-            height: 50%
-            width: 100%
-            display: flex
-            flex-direction: column
+    .divider
+        position: absolute
+        left: 0
+        height: 50%
+        width: 100%
+        display: flex
+        flex-direction: column
 
-            &.top
-                top: 0
+        &.top
+            top: 0
 
-            &.bottom
-                bottom: 0
+        &.bottom
+            bottom: 0
 
-            svg
-                position: relative
-                display: block
-                width: calc(195% + 1.3px)
-                height: 0
+        svg
+            position: relative
+            display: block
+            width: calc(195% + 1.3px)
+            height: 0
 
-            .fill-divider
-                flex-grow: 1
-                background-color: light-blue
+        .fill-divider
+            flex-grow: 1
+            background-color: light-blue
 
-            .shape-fill
-                fill: light-blue
+        .shape-fill
+            fill: light-blue
 </style>

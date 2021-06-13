@@ -116,7 +116,7 @@ export default {
 <style lang="stylus" scoped>
   .container
     position: relative
-    height: 100vh
-    width: 100vw
+    height: 100%
+    width: 100%
     overflow: hidden
 </style>

@@ -26,11 +26,18 @@
 
 <script>
 import { gsap } from 'gsap'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Nav',
   props: {
     customClass: { type: String, default: '' }
+  },
+  computed: mapState(['burgerShow']),
+  watch: {
+    burgerShow (newValue) {
+      this.handleBurgerShow(newValue)
+    }
   },
   mounted () {
     this.$refs.link.$el.addEventListener('mouseenter', () => {
@@ -48,21 +55,24 @@ export default {
   },
   methods: {
     toggleBurger () {
-      this.$store.commit('toggleBurger')
-      document.querySelector('.links').style.display = 'flex'
-      gsap.fromTo('.links .link', {
-        translateY: this.$store.state.burgerShow ? '3rem' : 0,
-        opacity: this.$store.state.burgerShow ? 0 : 1
+      this.$store.commit('toggleBurger', !this.$store.state.burgerShow)
+    },
+    handleBurgerShow (show) {
+      document.querySelector('nav .links').style.display = 'flex'
+      gsap.fromTo('nav .links .link', {
+        translateY: show ? '3rem' : 0,
+        opacity: show ? 0 : 1
       },
       {
-        delay: this.$store.state.burgerShow ? 1.5 : 0,
+        delay: show ? 1.5 : 0,
         duration: 0.5,
-        translateY: this.$store.state.burgerShow ? 0 : '3rem',
-        opacity: this.$store.state.burgerShow ? 1 : 0,
+        translateY: show ? 0 : '3rem',
+        opacity: show ? 1 : 0,
         stagger: 0.2
       })
     }
   }
+
 }
 </script>
 
@@ -98,10 +108,10 @@ export default {
       z-index: 2
 
   @media (max-aspect-ratio: 13/10) {
-    .links {
+    nav .links {
       position: fixed
-      width: 100vw
-      height: 100vh
+      width: 100%
+      height: 100%
       top: 0
       left: 0
       display: flex
@@ -112,7 +122,7 @@ export default {
       display: none
     }
 
-    .links .link {
+    nav .links .link {
       opacity: 0
     }
 
