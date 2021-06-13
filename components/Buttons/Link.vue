@@ -10,6 +10,7 @@
       v-else
       :href="url"
       target="_blank"
+      rel="noopener noreferrer"
     >
       {{ text }}
     </a>
