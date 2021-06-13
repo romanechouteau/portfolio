@@ -1,6 +1,6 @@
 import { Mesh, Object3D, PlaneGeometry, ShaderMaterial } from 'three'
 import { gsap } from 'gsap'
-import { get, isEqual, isNumber } from 'lodash'
+import { get, isEqual, isNumber, replace } from 'lodash'
 
 import vertexShader from '../../shaders/image.vert'
 import fragmentShader from '../../shaders/image.frag'
@@ -19,6 +19,7 @@ export default class Image {
     } else {
       this.key = 'project1'
     }
+    this.bigY = 0
     this.time = time
     this.sizes = sizes
     this.assets = assets
@@ -87,6 +88,10 @@ export default class Image {
     this.image.position.y = 0
   }
 
+  setImageToBigY () {
+    this.image.position.y = this.bigY
+  }
+
   setMovement () {
     this.time.on('tick', () => {
       this.material.uniforms.uTime.value += 0.005
@@ -100,6 +105,7 @@ export default class Image {
     const x = this.getImagePositionLeft()
     const scale = this.getImageScale()
     const y = this.getImagePositionTop(scale)
+    this.bigY = y
 
     gsap.to(this.image.scale, {
       duration: 1.5,
@@ -121,6 +127,9 @@ export default class Image {
     this.bigImage = false
 
     const x = this.getImageHiddenPositionLeft()
+    const scale = this.getImageScale()
+    const y = this.getImagePositionTop(scale)
+    this.bigY = y
 
     gsap.to(this.image.scale, {
       duration: 1.5,
@@ -132,7 +141,7 @@ export default class Image {
     gsap.to(this.image.position, {
       duration: 1.5,
       x,
-      y: 0,
+      y,
       ease: 'elastic.out(1, 0.5)',
       onComplete: () => {
         if (isEqual(this.bigImage, false)) {
@@ -184,7 +193,11 @@ export default class Image {
     const ratio = windowHeight / this.sizes.height
 
     if (isEqual(this.sizes.device, 'mobile') && isEqual(this.key, 'about')) {
-      const margin = document.querySelector('.about').offsetHeight - document.querySelector('.imagePlaceholder').offsetHeight + 64
+      const margin =
+      document.querySelector('.container.about').offsetHeight -
+      document.querySelector('.imagePlaceholder.about').offsetHeight +
+      document.querySelector('.container.about').offsetTop -
+      parseInt(replace(window.getComputedStyle(document.querySelector('.container.about'), null).paddingBottom, 'px', ''), 10)
 
       return windowTop - height / 2 - margin * ratio
     }
@@ -213,6 +226,12 @@ export default class Image {
       const scale = this.getImageScale()
       this.image.position.y = this.getImagePositionTop(scale)
       this.image.scale.set(scale, scale, scale)
+    }
+  }
+
+  scrollHidden (offset) {
+    if (isEqual(this.hidden, true)) {
+      this.container.position.y = -offset
     }
   }
 }

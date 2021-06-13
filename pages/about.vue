@@ -13,7 +13,7 @@
         custom-class="about"
       />
     </div>
-    <ImagePlaceholder />
+    <ImagePlaceholder custom-class="about" />
   </Right>
 </template>
 
@@ -79,4 +79,7 @@ export default {
     flex-direction: row
     justify-content: flex-start
     align-items: center
+
+    .placeholderLink
+      padding: 0.5rem
 </style>

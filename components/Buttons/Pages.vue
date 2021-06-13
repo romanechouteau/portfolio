@@ -65,7 +65,7 @@ export default {
       return isEqual(this.$store.state.indexPage, key)
     },
     handleScroll (event) {
-      if (event.deltaY >= 0 || event.touches[0].clientY <= this.touchY) {
+      if (event.deltaY >= 0 || get(event, 'touches[0].clientY', this.touchY + 1) <= this.touchY) {
         this.touchY = get(event, 'touches[0].clientY', 0)
         return this.$store.commit('setIndexPage', (this.$store.state.indexPage + 1) % (this.pages.length))
       }
@@ -74,7 +74,7 @@ export default {
       this.$store.commit('setIndexPage', prevPage >= 0 ? prevPage : this.pages.length - 1)
     },
     touchStart (event) {
-      this.touchY = event.touches[0].clientY
+      this.touchY = get(event, 'touches[0].clientY', 0)
     },
     touchEnd () {
       this.touchY = 0

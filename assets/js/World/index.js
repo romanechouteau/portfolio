@@ -1,5 +1,5 @@
 import { Object3D } from 'three'
-import { get, isUndefined, map, nth, forEach } from 'lodash'
+import { get, isUndefined, map, nth, forEach, isEqual } from 'lodash'
 
 import { INDEX_BLOBS_DATA } from '../config'
 import projects from '../../../content/projects.json'
@@ -130,8 +130,13 @@ export default class World {
     if (isUndefined(this.aboutImage)) {
       this.setImage('aboutImage', 'about')
     } else {
-      this.aboutImage.resetImageX(-1)
-      this.aboutImage.setImageCenterY()
+      if (isEqual(this.sizes.device, 'desktop')) {
+        this.aboutImage.resetImageX(-1)
+        this.aboutImage.setImageCenterY()
+      } else {
+        this.aboutImage.resetImageX(-1)
+        this.aboutImage.setImageToBigY()
+      }
       this.moveImage('aboutImage')
     }
   }
@@ -232,6 +237,15 @@ export default class World {
   scroll (offset) {
     if (!isUndefined(this.background)) {
       this.background.scroll(offset)
+    }
+    if (!isUndefined(this.images)) {
+      this.images.forEach(image => image.scrollHidden(offset))
+    }
+    if (!isUndefined(this.image)) {
+      this.image.scrollHidden(offset)
+    }
+    if (!isUndefined(this.aboutImage)) {
+      this.aboutImage.scrollHidden(offset)
     }
   }
 }
