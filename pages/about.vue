@@ -13,6 +13,7 @@
         custom-class="about"
       />
     </div>
+    <ImagePlaceholder />
   </Right>
 </template>
 
@@ -25,6 +26,7 @@ import Link from '../components/Buttons/Link'
 import Right from '../components/Containers/Right'
 import Subtitle from '../components/Text/Subtitle'
 import Description from '../components/Text/Description'
+import ImagePlaceholder from '../components/Placeholders/ImagePlaceholder'
 import { APPEAR_FROM_BOTTOM_TRANSITION } from '~/assets/js/config'
 
 export default {
@@ -34,7 +36,8 @@ export default {
     Right,
     Link,
     Subtitle,
-    Description
+    Description,
+    ImagePlaceholder
   },
   transition: APPEAR_FROM_BOTTOM_TRANSITION,
   async asyncData ({ $content }) {

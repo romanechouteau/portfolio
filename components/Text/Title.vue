@@ -25,11 +25,14 @@ export default {
       margin-bottom: 1.5rem
 
   @media (max-aspect-ratio: 13/10) {
-    body .title {
-      position: relative
-      left: -5vw
+    .container .title {
       font-size: 3.5rem
       max-width: 50%
+    }
+
+    .container:not('.about') .title {
+      position: relative
+      left: -5vw
       margin-bottom: 0
     }
   }

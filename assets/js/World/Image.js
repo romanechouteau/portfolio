@@ -182,6 +182,13 @@ export default class Image {
       matrix
     )
     const ratio = windowHeight / this.sizes.height
+
+    if (isEqual(this.sizes.device, 'mobile') && isEqual(this.key, 'about')) {
+      const margin = document.querySelector('.about').offsetHeight - document.querySelector('.imagePlaceholder').offsetHeight + 64
+
+      return windowTop - height / 2 - margin * ratio
+    }
+
     const margin = document.querySelector('nav').offsetHeight + 64
 
     return windowTop - height / 2 - margin * ratio
