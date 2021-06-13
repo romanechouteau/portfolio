@@ -47,4 +47,12 @@ export default {
   .show
     .projectTitle
       transform: none
+
+  @media (max-aspect-ratio: 13/10) {
+    .projectInfo .projectTitle {
+      right: auto
+      left: 5%
+      align-items flex-start
+    }
+  }
 </style>

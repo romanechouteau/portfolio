@@ -122,4 +122,10 @@ export default {
         svg
           .fill
               fill: carbon
+
+  @media (max-aspect-ratio: 13/10) {
+    .pages {
+      display: none
+    }
+  }
 </style>
