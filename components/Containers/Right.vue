@@ -35,7 +35,7 @@ export default {
       transform: translateX(-50%)
       justify-content: flex-start
       max-width: calc(85vh * 2 / 3)
-      padding: 1rem 0 2rem 0
+      padding: 1rem 0 4rem 0
     }
   }
 </style>
