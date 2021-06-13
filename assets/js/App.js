@@ -1,7 +1,7 @@
 
 import { Scene, WebGLRenderer, sRGBEncoding, WebGLRenderTarget, TextureLoader } from 'three'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
-import { get, map, find, has } from 'lodash'
+import { get, map } from 'lodash'
 
 import projects from '../../content/projects.json'
 import Time from './utils/Time'
@@ -160,9 +160,8 @@ export default class App {
   }
 
   setScroll () {
-    const onScroll = (event) => {
-      const window = find(event.path, path => has(path, 'pageYOffset'))
-      const offset = (get(window, 'pageYOffset', 0.5) / this.sizes.height) * 8
+    const onScroll = () => {
+      const offset = (window.pageYOffset / this.sizes.height) * 8
       this.camera.scroll(offset)
       this.world.scroll(offset)
     }
