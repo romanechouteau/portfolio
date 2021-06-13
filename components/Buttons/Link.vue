@@ -79,7 +79,6 @@ export default {
   },
   methods: {
     onClick () {
-      console.log('hello')
       this.$store.commit('toggleBurger', false)
     }
   }
