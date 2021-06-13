@@ -30,7 +30,7 @@ export default {
       max-width: 50%
     }
 
-    .container:not('.about') .title {
+    .container:not(.about) .title {
       position: relative
       left: -5vw
       margin-bottom: 0
