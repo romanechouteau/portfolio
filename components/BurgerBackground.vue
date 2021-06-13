@@ -28,6 +28,8 @@ export default {
       const longDuration = 1.5
       const shortDuration = 0.7
 
+      document.querySelector('.background').style.display = 'flex'
+
       gsap.to('.divider svg', {
         keyframes: [
           { height: `${dividerHeight}px`, duration: shortDuration },
@@ -46,6 +48,7 @@ export default {
         onComplete (show) {
           if (!show) {
             document.querySelector('.links').style.display = 'none'
+            document.querySelector('.background').style.display = 'none'
           }
         },
         onCompleteParams: [newValue]
@@ -62,7 +65,7 @@ export default {
         top: 100vh
         width: 100vh
         height: 100vw
-        display: flex
+        display: none
         align-items: flex-end
         transform: rotate(-90deg)
         transform-origin: top left
