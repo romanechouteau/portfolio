@@ -1,7 +1,7 @@
 
 import { Scene, WebGLRenderer, sRGBEncoding, WebGLRenderTarget, TextureLoader } from 'three'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
-import { get, map } from 'lodash'
+import { get, map, find, has } from 'lodash'
 
 import projects from '../../content/projects.json'
 import Time from './utils/Time'
@@ -20,6 +20,7 @@ export default class App {
       height: window.innerHeight,
       pixelRatio: Math.min(window.devicePixelRatio, 2)
     }
+    this.sizes.device = this.getDevice()
     this.assets = {
       textures: {},
       models: {}
@@ -32,6 +33,7 @@ export default class App {
     this.setRenderer()
     this.setCamera()
     this.setWorld()
+    this.setScroll()
   }
 
   async loadScene () {
@@ -95,6 +97,7 @@ export default class App {
     window.addEventListener('resize', () => {
       this.sizes.width = window.innerWidth
       this.sizes.height = window.innerHeight
+      this.sizes.device = this.getDevice()
 
       this.renderer.setSize(this.sizes.width, this.sizes.height)
       this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -147,5 +150,23 @@ export default class App {
       backMap: this.backFBO.texture
     })
     this.scene.add(this.world.container)
+  }
+
+  getDevice () {
+    if (this.sizes.width < this.sizes.height * 1.3) {
+      return 'mobile'
+    }
+    return 'desktop'
+  }
+
+  setScroll () {
+    const onScroll = (event) => {
+      const window = find(event.path, path => has(path, 'pageYOffset'))
+      const offset = (get(window, 'pageYOffset', 0) / this.sizes.height) * 8
+      this.camera.scroll(offset)
+      this.world.scroll(offset)
+    }
+    document.addEventListener('scroll', onScroll)
+    document.addEventListener('touchmove', onScroll)
   }
 }

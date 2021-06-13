@@ -11,6 +11,7 @@
       :text="project.name"
       custom-class="project"
     />
+    <PlaceholdersImagePlaceholder />
     <Description
       :text="project.description"
       custom-class="project"

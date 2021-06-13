@@ -5,7 +5,7 @@ import { get, isEqual, isNumber } from 'lodash'
 import vertexShader from '../../shaders/image.vert'
 import fragmentShader from '../../shaders/image.frag'
 import { IMAGE_PROJECT_SETUP_SCALE } from '../config'
-import { getObjectXPositionningData } from '../utils/Size'
+import { getObjectXPositionningData, getObjectYPositionningData, getSizeAtZ } from '../utils/Size'
 
 export default class Image {
   constructor ({ key, time, sizes, assets, camera }) {
@@ -98,18 +98,20 @@ export default class Image {
     this.bigImage = true
 
     const x = this.getImagePositionLeft()
+    const scale = this.getImageScale()
+    const y = this.getImagePositionTop(scale)
 
     gsap.to(this.image.scale, {
       duration: 1.5,
-      x: IMAGE_PROJECT_SETUP_SCALE,
-      y: IMAGE_PROJECT_SETUP_SCALE,
-      z: IMAGE_PROJECT_SETUP_SCALE,
+      x: scale,
+      y: scale,
+      z: scale,
       ease: 'elastic.out(1, 0.5)'
     })
     gsap.to(this.image.position, {
       duration: 1.5,
       x,
-      y: 0,
+      y,
       ease: 'elastic.out(1, 0.5)'
     })
   }
@@ -141,7 +143,20 @@ export default class Image {
     })
   }
 
+  getImageScale () {
+    if (isEqual(this.sizes.device, 'mobile')) {
+      const { width } = getSizeAtZ(this.image.position.z, this.camera.camera, this.sizes)
+      const scale = width * 0.8 / this.image.geometry.parameters.width
+      return Math.min(scale, IMAGE_PROJECT_SETUP_SCALE)
+    }
+    return IMAGE_PROJECT_SETUP_SCALE
+  }
+
   getImagePositionLeft () {
+    if (isEqual(this.sizes.device, 'mobile')) {
+      return 0
+    }
+
     const matrix = this.image.matrixWorld.clone().makeScale(IMAGE_PROJECT_SETUP_SCALE, IMAGE_PROJECT_SETUP_SCALE, IMAGE_PROJECT_SETUP_SCALE)
 
     const { width, windowLeft, windowWidth } = getObjectXPositionningData(
@@ -152,6 +167,24 @@ export default class Image {
     )
 
     return windowLeft + width / 2 + 0.05 * windowWidth
+  }
+
+  getImagePositionTop (scale) {
+    if (isEqual(this.sizes.device, 'desktop')) {
+      return 0
+    }
+
+    const matrix = this.image.matrixWorld.clone().makeScale(scale, scale, scale)
+
+    const { height, windowTop, windowHeight } = getObjectYPositionningData(
+      this.camera.camera,
+      this.image,
+      matrix
+    )
+    const ratio = windowHeight / this.sizes.height
+    const margin = document.querySelector('nav').offsetHeight + 64
+
+    return windowTop - height / 2 - margin * ratio
   }
 
   getImageHiddenPositionLeft () {
@@ -170,6 +203,9 @@ export default class Image {
   resize () {
     if (isEqual(this.bigImage, true)) {
       this.image.position.x = this.getImagePositionLeft()
+      const scale = this.getImageScale()
+      this.image.position.y = this.getImagePositionTop(scale)
+      this.image.scale.set(scale, scale, scale)
     }
   }
 }

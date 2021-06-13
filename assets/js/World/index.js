@@ -228,4 +228,10 @@ export default class World {
       this.aboutImage.resize()
     }
   }
+
+  scroll (offset) {
+    if (!isUndefined(this.background)) {
+      this.background.scroll(offset)
+    }
+  }
 }

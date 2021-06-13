@@ -1,4 +1,5 @@
 import { Mesh, ShaderMaterial, Object3D, PlaneGeometry, Color } from 'three'
+import { gsap } from 'gsap'
 
 import { getSizeAtZ } from '../utils/Size'
 import vertexShader from '~/assets/shaders/background.vert'
@@ -57,5 +58,12 @@ export default class Background {
     const dimensions = this.getBackgroundSize()
     this.background.position.set(0, 0, dimensions.z)
     this.background.scale.set(dimensions.width, dimensions.height, 1)
+  }
+
+  scroll (offset) {
+    gsap.to(this.container.position, {
+      y: -offset,
+      duration: 0.1
+    })
   }
 }

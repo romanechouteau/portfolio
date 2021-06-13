@@ -78,54 +78,62 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-    .link
-        position: relative
-        display: inline-block
-        width: fit-content
-        font-family: 'Gloria Hallelujah', cursive
+  .link
+      position: relative
+      display: inline-block
+      width: fit-content
+      font-family: 'Gloria Hallelujah', cursive
 
-        & a
-            color: carbon
-            text-decoration: none
-            padding: 0.5rem
+      & a
+          color: carbon
+          text-decoration: none
+          padding: 0.5rem
 
-        .decoration
-            opacity: 1
-            position: absolute
-            width: 80%
-            top: calc(100% - 0.25rem)
-            left: 50%
-            transform: translateX(-50%)
-            z-index: -1
+      .decoration
+          opacity: 1
+          position: absolute
+          width: 80%
+          top: calc(100% - 0.25rem)
+          left: 50%
+          transform: translateX(-50%)
+          z-index: -1
 
-            & path
-                transition: stroke-dashoffset 0.5s ease
+          & path
+              transition: stroke-dashoffset 0.5s ease
 
-            &.circle
-                width: 100%
-                top: 50%
-                transform: translate(-50%, -50%)
+          &.circle
+              width: 100%
+              top: 50%
+              transform: translate(-50%, -50%)
 
-        &:hover
-            .decoration path
-                stroke-dashoffset: 0!important
+      &:hover
+          .decoration path
+              stroke-dashoffset: 0!important
 
-        &.about
-            margin-right: 3rem
+      &.about
+          margin-right: 3rem
 
-        &.back
-            margin-bottom: 1.5rem
+      &.back
+          margin-bottom: 1.5rem
 
-        &.nav
-            margin-left: 3rem
+      &.nav
+          margin-left: 3rem
 
-        &.absolute
-            position: absolute
-            bottom: 25%
-            left: 55%
-            transform: translateX(calc(50vw + 100%))
-            transition: transform 0.7s ease
+      &.absolute
+          position: absolute
+          bottom: 25%
+          left: 55%
+          transform: translateX(calc(50vw + 100%))
+          transition: transform 0.7s ease
 
-        .show &
-            transform: none
+      .show &
+          transform: none
+
+  @media (max-aspect-ratio: 13/10) {
+    .link.back {
+      position: relative
+      left: -0.5rem
+      margin-bottom: 6rem
+    }
+  }
 </style>

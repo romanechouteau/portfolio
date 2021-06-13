@@ -65,8 +65,8 @@ export default {
       transition: filter 0.5s ease
 
       img
-        width: 4rem
-        height: auto
+        width: auto
+        height: 3.2rem
 
       &:hover
         filter: drop-shadow(-2px 5px 0px main-yellow)

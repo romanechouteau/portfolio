@@ -25,4 +25,17 @@ export default {
     padding: 0 5vw
     max-width: 1000px
     color: carbon
+
+  @media (max-aspect-ratio: 13/10) {
+    body .container {
+      height: auto
+      width: 80%
+      left: 50%
+      top: 6rem
+      transform: translateX(-50%)
+      justify-content: flex-start
+      max-width: calc(85vh * 2 / 3)
+      padding: 1rem 0 2rem 0
+    }
+  }
 </style>

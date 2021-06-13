@@ -23,4 +23,14 @@ export default {
 
     &.hasSubtitle
       margin-bottom: 1.5rem
+
+  @media (max-aspect-ratio: 13/10) {
+    body .title {
+      position: relative
+      left: -5vw
+      font-size: 3.5rem
+      max-width: 50%
+      margin-bottom: 0
+    }
+  }
 </style>
