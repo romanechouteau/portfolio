@@ -1,17 +1,31 @@
+const baseUrl = process.env.BASE_URL || 'localhost:3000'
+const title = 'romane chouteau ~ creative developer'
+const description = 'Hi! I’m Romane Chouteau, a 20 year old creative developer. Here you can discover a few of my projects!'
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'portfolio',
+    title: 'romane chouteau ~ creative developer',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: description },
+      { name: 'og:title', content: title },
+      { name: 'og:description', content: description },
+      { name: 'og:type', content: 'website' },
+      { name: 'og:url', content: baseUrl },
+      { name: 'og:image', content: `${baseUrl}/og_image.png` },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:creator', content: '@RomaneChouteau' },
+      { name: 'twitter:title', content: title },
+      { name: 'twitter:description', content: description },
+      { name: 'twitter:image', content: `${baseUrl}/og_image.png` }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
