@@ -3,15 +3,19 @@ import { Color } from 'three'
 
 export const MAIN_BLUE = 0x7287FF
 export const SECONDARY_BLUE = 0xBFC8FF
+export const LIGHT_BLUE = 0xE8EBFF
 
 export const MAIN_RED = 0xFF7286
 export const SECONDARY_RED = 0xFFBFC8
+export const LIGHT_RED = 0xFFE8EB
 
 export const MAIN_YELLOW = 0xFFEB72
 export const SECONDARY_YELLOW = 0xFFF6BF
+export const LIGHT_YELLOW = 0xFFFBE5
 
 export const MAIN_GREEN = 0x3AE983
 export const SECONDARY_GREEN = 0xC3F8DA
+export const LIGHT_GREEN = 0xE8FCF1
 
 export const INDEX_BLOBS_DATA = [
   [

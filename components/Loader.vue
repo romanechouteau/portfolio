@@ -23,6 +23,7 @@
 
 <script>
 import { gsap } from 'gsap'
+import { LIGHT_BLUE, LIGHT_RED, LIGHT_GREEN, LIGHT_YELLOW } from '~/assets/js/config'
 
 const dividerHeight = 245
 
@@ -45,22 +46,47 @@ export default {
       repeat: -1,
       ease: 'elastic.inOut(1, 0.5)'
     })
+
+    const colorDuration = 3
+    gsap.to('.fill-divider', {
+      keyframes: [
+        { backgroundColor: `#${LIGHT_BLUE.toString(16)}`, duration: colorDuration / 2 },
+        { backgroundColor: `#${LIGHT_RED.toString(16)}`, duration: colorDuration },
+        { backgroundColor: `#${LIGHT_YELLOW.toString(16)}`, duration: colorDuration },
+        { backgroundColor: `#${LIGHT_GREEN.toString(16)}`, duration: colorDuration },
+        { backgroundColor: `#${LIGHT_BLUE.toString(16)}`, duration: colorDuration / 2 }
+      ],
+      repeat: -1
+    })
+    gsap.to('.shape-fill', {
+      keyframes: [
+        { fill: `#${LIGHT_BLUE.toString(16)}`, duration: colorDuration / 2 },
+        { fill: `#${LIGHT_RED.toString(16)}`, duration: colorDuration },
+        { fill: `#${LIGHT_YELLOW.toString(16)}`, duration: colorDuration },
+        { fill: `#${LIGHT_GREEN.toString(16)}`, duration: colorDuration },
+        { fill: `#${LIGHT_BLUE.toString(16)}`, duration: colorDuration / 2 }
+      ],
+      repeat: -1
+    })
   },
   methods: {
     onLeave (el, done) {
       const delay = new Date().getTime() - this.time.getTime() < 1000 ? 1 : 0
+      const startDuration = 1.5
+      const endDuration = 0.7
+
       gsap.to('.divider svg', {
         keyframes: [
-          { height: `${dividerHeight}px`, duration: 1.5 },
-          { height: 0, duration: 0.7 }
+          { height: `${dividerHeight}px`, duration: startDuration },
+          { height: 0, duration: endDuration }
         ],
         ease: 'power3.inOut',
         delay: delay + 0.4
       })
       gsap.to('.divider', {
         keyframes: [
-          { height: '30%', duration: 1.5 },
-          { height: 0, duration: 0.7 }
+          { height: '30%', duration: startDuration },
+          { height: 0, duration: endDuration }
         ],
         ease: 'power3.inOut',
         onComplete: done,
@@ -116,8 +142,8 @@ export default {
 
             .fill-divider
                 flex-grow: 1
-                background-color: white
+                background-color: light-blue
 
             .shape-fill
-                fill: white
+                fill: light-blue
 </style>
