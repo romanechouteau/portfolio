@@ -135,5 +135,10 @@ export default {
       left: -0.5rem
       margin-bottom: 6rem
     }
+
+    .link.nav {
+      margin: 1.5rem 0
+      font-size: 1.2rem
+    }
   }
 </style>

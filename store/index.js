@@ -1,7 +1,8 @@
 export const state = () => ({
   worldSetters: { },
   indexPage: 0,
-  ready: false
+  ready: false,
+  burgerShow: false
 })
 
 export const mutations = {
@@ -13,5 +14,8 @@ export const mutations = {
   },
   isReady (state) {
     state.ready = true
+  },
+  toggleBurger (state) {
+    state.burgerShow = !state.burgerShow
   }
 }
