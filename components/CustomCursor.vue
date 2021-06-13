@@ -80,4 +80,10 @@ export default {
 
       &.yellow
         stroke: main-yellow
+
+  @media (max-aspect-ratio: 13/10) {
+    .cursorWrapper {
+      display: none
+    }
+  }
 </style>
