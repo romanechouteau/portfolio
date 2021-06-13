@@ -15,7 +15,7 @@
 import { gsap } from 'gsap'
 import { isEqual, debounce, get } from 'lodash'
 
-import PageBlob from '~/assets/svgs/page_blob.inline.svg'
+import PageBlob from './PageBlob.vue'
 
 export default {
   name: 'Pages',
@@ -105,23 +105,6 @@ export default {
       background-size: contain
       background-repeat: no-repeat
       background-position: center
-
-      svg
-        position: absolute
-        width: 100%
-        height: 100%
-
-        .stroke
-          fill: carbon
-
-        .fill
-          fill: transparent
-          transition: fill 0.1s ease
-
-      &.selected, &:hover
-        svg
-          .fill
-              fill: carbon
 
   @media (max-aspect-ratio: 13/10) {
     .pages {
