@@ -1,7 +1,7 @@
 
 import { Scene, WebGLRenderer, sRGBEncoding, WebGLRenderTarget, TextureLoader } from 'three'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
-import { get, map } from 'lodash'
+import { get, map, debounce } from 'lodash'
 
 import projects from '../../content/projects.json'
 import Time from './utils/Time'
@@ -165,7 +165,11 @@ export default class App {
       this.camera.scroll(offset)
       this.world.scroll(offset)
     }
-    document.addEventListener('scroll', onScroll)
-    document.addEventListener('touchmove', onScroll)
+    document.addEventListener('scroll', debounce(onScroll, 10, {
+      leading: true
+    }))
+    document.addEventListener('touchmove', debounce(onScroll, 10, {
+      leading: true
+    }))
   }
 }

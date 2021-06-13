@@ -33,7 +33,7 @@ export default class Camera {
   scroll (offset) {
     gsap.to(this.container.position, {
       y: -offset,
-      duration: 0.1
+      duration: 0.2
     })
   }
 }
