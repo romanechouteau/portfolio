@@ -13,7 +13,7 @@
 
 <script>
 import { gsap } from 'gsap'
-import { isEqual, debounce } from 'lodash'
+import { isEqual, debounce, get } from 'lodash'
 
 import PageBlob from '~/assets/svgs/page_blob.inline.svg'
 
@@ -25,12 +25,23 @@ export default {
   props: {
     pages: { type: Array, default: () => [] }
   },
+  data () {
+    return {
+      touchY: 0
+    }
+  },
   beforeMount () {
     this.scrollHandler = debounce(this.handleScroll, 300, { leading: true, trailing: false, maxWait: 1500 })
     window.addEventListener('wheel', this.scrollHandler)
+    window.addEventListener('touchstart', this.touchStart)
+    window.addEventListener('touchmove', this.scrollHandler)
+    window.addEventListener('touchend', this.touchEnd)
   },
   beforeDestroy () {
     window.removeEventListener('wheel', this.scrollHandler)
+    window.removeEventListener('touchstart', this.touchStart)
+    window.removeEventListener('touchmove', this.scrollHandler)
+    window.removeEventListener('touchend', this.touchEnd)
   },
   mounted () {
     this.$refs.link.addEventListener('mouseenter', () => {
@@ -54,12 +65,19 @@ export default {
       return isEqual(this.$store.state.indexPage, key)
     },
     handleScroll (event) {
-      if (event.deltaY >= 0) {
+      if (event.deltaY >= 0 || event.touches[0].clientY <= this.touchY) {
+        this.touchY = get(event, 'touches[0].clientY', 0)
         return this.$store.commit('setIndexPage', (this.$store.state.indexPage + 1) % (this.pages.length))
       }
 
       const prevPage = this.$store.state.indexPage - 1
       this.$store.commit('setIndexPage', prevPage >= 0 ? prevPage : this.pages.length - 1)
+    },
+    touchStart (event) {
+      this.touchY = event.touches[0].clientY
+    },
+    touchEnd () {
+      this.touchY = 0
     }
   }
 }
