@@ -1,3 +1,5 @@
+import projects from './content/projects.json'
+
 const baseUrl = process.env.BASE_URL || 'localhost:3000'
 const title = 'romane chouteau ~ creative developer'
 const description = 'Hi! I’m Romane Chouteau, a 20 year old creative developer. Here you can discover a few of my projects!'
@@ -31,6 +33,14 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap' }
     ]
+  },
+
+  generate: {
+    routes () {
+      return projects.map((project) => {
+        return '/projects/' + project.slug
+      })
+    }
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
