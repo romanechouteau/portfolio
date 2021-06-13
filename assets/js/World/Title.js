@@ -19,7 +19,7 @@ export default class Title {
     this.camera = camera
     this.envMap = envMap
     this.backMap = backMap
-    this.inFrame = true
+    this.inFrame = false
     this.resolution = [
       this.sizes.width * this.sizes.pixelRatio,
       this.sizes.height * this.sizes.pixelRatio
@@ -58,8 +58,9 @@ export default class Title {
       fragmentShader: normalFragmentShader
     })
 
-    this.setLetters(this.romane, 0.2, 0.25)
-    this.setLetters(this.chouteau, -1.2, 0.25)
+    const { top, bottom } = this.getYPositions()
+    this.setLetters(this.romane, top)
+    this.setLetters(this.chouteau, bottom)
 
     this.setMovement()
 
@@ -69,27 +70,12 @@ export default class Title {
   }
 
   setLetters (word, y) {
-    const space = 0.1
-    const scale = 0.25
-
-    const widths = map(word, (letter) => {
+    forEach(word, (letter) => {
       letter.geometry.computeBoundingBox()
       letter.material = this.material
       letter.layers.set(1)
-      return get(letter, 'geometry.boundingBox.max.x', 0) * scale - get(letter, 'geometry.boundingBox.min.x', 0) * scale
     })
-    const totalWidth = reduce(widths, (acc, width) => acc + width + space, 0)
-    const start = -(totalWidth / 2)
-
-    let position = start
-    this.letterPositions.push([])
-    const { width: windowWidth } = getSizeAtZ(0, this.camera.camera, this.sizes)
-    forEach(word, (letter, index) => {
-      letter.scale.set(scale, scale, scale)
-      letter.position.set(position + windowWidth, y, 0)
-      last(this.letterPositions).push(position)
-      position += widths[index] + space
-    })
+    this.positionLetters(word, y)
   }
 
   setMovement () {
@@ -97,7 +83,8 @@ export default class Title {
       if (this.inFrame) {
         forEach([this.romane, this.chouteau], (word, i) => {
           forEach(word, (letter, index) => {
-            letter.position.y = 0.2 - (1.5 * i) + (Math.sin(index + 0.0006 * this.time.elapsed) * 0.15)
+            const { top, bottom } = this.getYPositions()
+            letter.position.y = top + (bottom * i) + (Math.sin(index + 0.0006 * this.time.elapsed) * 0.15)
           })
         })
       }
@@ -122,6 +109,11 @@ export default class Title {
       this.sizes.height * this.sizes.pixelRatio
     ]
     this.frontMaterial.uniforms.uResolution.value = this.resolution
+
+    const { top, bottom } = this.getYPositions()
+    this.letterPositions = []
+    this.positionLetters(this.romane, top)
+    this.positionLetters(this.chouteau, bottom)
   }
 
   hide () {
@@ -145,7 +137,36 @@ export default class Title {
         stagger: 0.05,
         ease: 'power3.inOut'
       })
+      this.inFrame = true
     })
-    this.inFrame = true
+  }
+
+  positionLetters (word, y) {
+    const space = 0.1
+    const scale = isEqual(this.sizes.device, 'desktop') ? 0.25 : 0.1
+
+    const widths = map(word, (letter) => {
+      return get(letter, 'geometry.boundingBox.max.x', 0) * scale - get(letter, 'geometry.boundingBox.min.x', 0) * scale
+    })
+    const totalWidth = reduce(widths, (acc, width) => acc + width + space, 0)
+    const start = -(totalWidth / 2)
+
+    let position = start
+    this.letterPositions.push([])
+    const { width: windowWidth } = getSizeAtZ(0, this.camera.camera, this.sizes)
+    const offset = this.inFrame ? 0 : windowWidth
+    forEach(word, (letter, index) => {
+      letter.scale.set(scale, scale, scale)
+      letter.position.x = position + offset
+      last(this.letterPositions).push(position)
+      position += widths[index] + space
+    })
+  }
+
+  getYPositions () {
+    if (isEqual(this.sizes.device, 'desktop')) {
+      return { top: 0.2, bottom: -1.2 }
+    }
+    return { top: 0.1, bottom: -0.7 }
   }
 }
