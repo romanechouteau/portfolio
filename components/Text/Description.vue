@@ -25,4 +25,8 @@ export default {
   .description
     margin-bottom: 3rem
     line-height: 1.5
+    user-select: text
+
+    p
+      user-select: text
 </style>

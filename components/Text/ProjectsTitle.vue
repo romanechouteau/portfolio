@@ -36,11 +36,13 @@ export default {
       display: flex
       flex-direction: column
       align-items flex-end
+      user-select: text
       transform: translateX(calc(-50vw - 100%))
       transition: transform 0.7s ease
 
       span
         font-size: 3rem
+        user-select: text
 
   .show
     .projectTitle

@@ -18,4 +18,5 @@ export default {
   .subtitle
     font-size: 2rem
     margin-bottom: 3rem
+    user-select: text
 </style>

@@ -108,8 +108,10 @@ export default {
 
 <style lang="stylus" scoped>
     .loader
-        width: 100%
-        height: 100%
+        position: relative
+        width: 100vw
+        height: 100vh
+        overflow: hidden
 
         .smiley
             position: absolute
