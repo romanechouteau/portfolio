@@ -45,9 +45,8 @@ export default {
         ],
         delay: newValue ? 0 : 0.3,
         ease: 'power3.inOut',
-        onComplete (show) {
-          if (!show) {
-            document.querySelector('nav .links').style.display = 'none'
+        onComplete: (show) => {
+          if (!show && !this.$store.state.burgerShow) {
             document.querySelector('.background').style.display = 'none'
           }
         },

@@ -3,9 +3,9 @@
     <NuxtLink ref="link" to="/" class="logo">
       <img src="~/assets/images/logo_monogram.svg" alt="Logo of the initials RC in a rounded shape">
     </NuxtLink>
-    <div class="burgerIcon" @click="toggleBurger" />
+    <ButtonsBurger />
+    <BurgerBackground />
     <div class="links">
-      <BurgerBackground />
       <ButtonsLink
         url="/"
         text="my projects"
@@ -54,21 +54,26 @@ export default {
     })
   },
   methods: {
-    toggleBurger () {
-      this.$store.commit('toggleBurger', !this.$store.state.burgerShow)
-    },
     handleBurgerShow (show) {
       document.querySelector('nav .links').style.display = 'flex'
-      gsap.fromTo('nav .links .link', {
-        translateY: show ? '3rem' : 0,
-        opacity: show ? 0 : 1
-      },
-      {
+      gsap.to('nav .links .link', {
         delay: show ? 1.5 : 0,
         duration: 0.5,
         translateY: show ? 0 : '3rem',
         opacity: show ? 1 : 0,
-        stagger: 0.2
+        stagger: 0.2,
+        onComplete: () => {
+          if (!this.$store.state.burgerShow) {
+            gsap.set(document.querySelector('nav .links'), {
+              display: 'none'
+            })
+            gsap.set(document.querySelectorAll('nav .links .link.nav'), {
+              opacity: 0,
+              translateY: '3rem'
+            })
+          }
+        },
+        onCompleteParams: [show]
       })
     }
   }
@@ -100,13 +105,6 @@ export default {
       &:hover
         filter: drop-shadow(-2px 5px 0px main-yellow)
 
-    .burgerIcon
-      display: none
-      width: 3.2rem
-      height: 3.2rem
-      background-color: red
-      z-index: 2
-
   @media (max-aspect-ratio: 13/10) {
     nav .links {
       position: fixed
@@ -124,10 +122,7 @@ export default {
 
     nav .links .link {
       opacity: 0
-    }
-
-    nav .burgerIcon {
-      display: block
+      transform: translateY(3rem)
     }
   }
 

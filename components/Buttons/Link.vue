@@ -59,7 +59,7 @@ export default {
     customClass: { type: String, default: '' }
   },
   mounted () {
-    document.querySelectorAll('path').forEach((elem) => {
+    this.$refs.link.querySelectorAll('path').forEach((elem) => {
       elem.style.strokeDashoffset = elem.getTotalLength()
       elem.style.strokeDasharray = elem.getTotalLength()
     })
